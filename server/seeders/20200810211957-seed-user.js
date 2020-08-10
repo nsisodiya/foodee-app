@@ -18,29 +18,29 @@ module.exports = {
           firstName: 'Narendra',
           lastName: 's',
           email: 'narendra@gmail.com',
-          createdAt: new Date().toDateString(),
-          updatedAt: new Date().toDateString()
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           firstName: 'Narendra 1',
           lastName: 's',
           email: 'narendra1@gmail.com',
-          createdAt: new Date().toDateString(),
-          updatedAt: new Date().toDateString()
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           firstName: 'Narendra S1',
           lastName: 's',
           email: 'narendras1@gmail.com',
-          createdAt: new Date().toDateString(),
-          updatedAt: new Date().toDateString()
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           firstName: 'Narendra S2',
           lastName: 's',
           email: 'narendras2@gmail.com',
-          createdAt: new Date().toDateString(),
-          updatedAt: new Date().toDateString()
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}
