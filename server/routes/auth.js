@@ -52,11 +52,31 @@ body   {
 return JWT token
 */
 router.post('/login', function (req, res, next) {
-  return db.User.findAll()
-    .then((users) => res.json(users))
+  const { email, password } = req.body;
+  console.log('finding one', email);
+  return db.User.findOne({ where: { email } })
+    .then((user) => {
+      if (user === null) {
+        res.json({ error: true, message: 'Invalid email or password' });
+      }
+      if (user.password === password) {
+        res.json({ login: 'okay' });
+      } else {
+        res.json({ error: true, message: 'Invalid email or password' });
+      }
+    })
     .catch((err) => {
-      console.log('There was an error querying users', JSON.stringify(err));
-      return res.send(err);
+      console.log(
+        'There was an error querying users',
+        err,
+        JSON.stringify(err)
+      );
+      return res.json({
+        error: true,
+        fullError: err,
+        name: err.name,
+        json: JSON.stringify(err)
+      });
     });
 });
 
