@@ -20,6 +20,10 @@ module.exports = {
         unique: true,
         allowNull: false
       },
+      role: {
+        type: Sequelize.STRING, //REGULAR or ADMIN
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -33,8 +33,9 @@ return JWT token
 */
 router.post('/register', function (req, res, next) {
   const { name, email, password } = req.body;
-  return db.User.create({ id: uuidv4(), name, email, password })
-    .then(({ name, email, id }) => res.json({ name, email, id }))
+  var role = 'REGULAR';
+  return db.User.create({ id: uuidv4(), name, role, email, password })
+    .then(({ name, email, role, id }) => res.json({ role, name, email, id }))
     .catch((err) => {
       console.log('There was an error querying users', JSON.stringify(err));
       return res.send({
