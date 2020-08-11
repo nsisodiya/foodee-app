@@ -88,12 +88,20 @@ router.post('/login', function (req, res, next) {
 
 router.post('/me', async function (req, res, next) {
   try {
-    const { token } = req.body;
-    var decoded = await jwt.verify(token, privateKey);
-    const { email, name, id } = await db.User.findOne({
-      where: { email: decoded.email }
-    });
-    return res.json({ email, name, id });
+    if (req.headers.authorization === undefined) {
+      return res.json({
+        error: true,
+        message: 'Authorization headers are not provided'
+      });
+    } else {
+      var token = req.headers.authorization.split(' ')[1];
+      console.log('token', token);
+      var decoded = await jwt.verify(token, privateKey);
+      const { email, name, id } = await db.User.findOne({
+        where: { email: decoded.email }
+      });
+      return res.json({ email, name, id });
+    }
   } catch (err) {
     console.log('There was an error /me', err, JSON.stringify(err));
     return res.json({
