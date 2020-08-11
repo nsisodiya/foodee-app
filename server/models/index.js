@@ -16,8 +16,12 @@ if (config.use_env_variable) {
     sequelize = new Sequelize(
       {
         dialect: 'sqlite',
-        storage: config.storage
+        storage: config.storage,
+        logging: console.log
       }
+      // {
+      //   logging: console.log
+      // }
       //   {
       //     // Choose one of the logging options
       //     logging: console.log, // Default, displays the first parameter of the log function call

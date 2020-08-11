@@ -13,8 +13,8 @@ const db = require('./../models');
     4. [ ] Modify any info of a user
 ============================*/
 
-/* GET users listing. */
-router.get('/', async (req, res, next) => {
+/* POST review */
+router.post('/', async (req, res, next) => {
   try {
     const users = await db.User.findAll();
     res.json(users);

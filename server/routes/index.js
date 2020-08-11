@@ -1,6 +1,7 @@
 var rootRouter = require('./root');
 var usersRouter = require('./users');
 var authRouter = require('./auth');
+var reviewsRouter = require('./reviews');
 var meRouter = require('./me');
 var jwt = require('jsonwebtoken');
 const privateKey = 'TODO-get it from somewhere';
@@ -54,6 +55,7 @@ module.exports = (app) => {
   console.log('Setting up Routes');
   app.use('/', rootRouter);
   app.use('/users', authMiddleware, AdminRoleMiddleware, usersRouter);
+  app.use('/reviews', authMiddleware, reviewsRouter);
   app.use('/auth', authRouter);
   app.use('/me', authMiddleware, meRouter);
 };
