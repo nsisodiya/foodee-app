@@ -15,29 +15,29 @@ module.exports = {
       'Users',
       [
         {
-          firstName: 'Narendra',
-          lastName: 's',
+          name: 'Narendra',
+          password: 's',
           email: 'narendra@gmail.com',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          firstName: 'Narendra 1',
-          lastName: 's',
+          name: 'Narendra 1',
+          password: 's',
           email: 'narendra1@gmail.com',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          firstName: 'Narendra S1',
-          lastName: 's',
+          name: 'Narendra S1',
+          password: 's',
           email: 'narendras1@gmail.com',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          firstName: 'Narendra S2',
-          lastName: 's',
+          name: 'Narendra S2',
+          password: 's',
           email: 'narendras2@gmail.com',
           createdAt: new Date(),
           updatedAt: new Date()
