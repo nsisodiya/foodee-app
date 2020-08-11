@@ -5,10 +5,10 @@ const db = require('./../models');
 router.get('/', async function (req, res) {
   try {
     var decoded = req.loggedUser;
-    const { email, name, id } = await db.User.findOne({
+    const { email, name, role, id } = await db.User.findOne({
       where: { email: decoded.email }
     });
-    return res.json({ email, name, id });
+    return res.json({ email, name, role, id });
   } catch (err) {
     console.log('There was an error /me', err, JSON.stringify(err));
     return res.json({
