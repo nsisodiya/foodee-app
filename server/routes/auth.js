@@ -3,6 +3,8 @@ var router = express.Router();
 const db = require('./../models');
 const { v4: uuidv4 } = require('uuid');
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+const privateKey = 'TODO-get it from somewhere';
 
 const cryptPassword = function (password, callback) {
   bcrypt.genSalt(10, function (err, salt) {
@@ -60,7 +62,11 @@ router.post('/login', function (req, res, next) {
         res.json({ error: true, message: 'Invalid email or password' });
       }
       if (user.password === password) {
-        res.json({ login: 'okay' });
+        const token = jwt.sign({ id: user.id, email: user.email }, privateKey, {
+          expiresIn: '1d'
+        });
+
+        res.json({ token, login: 'okay' });
       } else {
         res.json({ error: true, message: 'Invalid email or password' });
       }
@@ -80,4 +86,22 @@ router.post('/login', function (req, res, next) {
     });
 });
 
+router.post('/me', async function (req, res, next) {
+  try {
+    const { token } = req.body;
+    var decoded = await jwt.verify(token, privateKey);
+    const { email, name, id } = await db.User.findOne({
+      where: { email: decoded.email }
+    });
+    return res.json({ email, name, id });
+  } catch (err) {
+    console.log('There was an error /me', err, JSON.stringify(err));
+    return res.json({
+      error: true,
+      fullError: err,
+      name: err.name,
+      json: JSON.stringify(err)
+    });
+  }
+});
 module.exports = router;
