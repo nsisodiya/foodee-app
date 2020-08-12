@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --log-level 3 --port 1234 --cache-dir .cache --open --out-dir dist",
-    "build:parcelBuild": "parcel build ./src/index.html --no-source-maps --detailed-report | tee report/parcel-build.txt",
+    "build:parcelBuild": "parcel build ./src/index.html --no-source-maps --detailed-report | tee reports/parcel-build.txt",
     "build": "run-s clean build:parcelBuild build:distDirTree",
-    "build:distDirTree": "tree dist -a -F -L2",
+    "build:distDirTree": "tree dist -a -F -L 2",
     "serve": "run-s build run-prod-server",
     "run-prod-server": "cd dist; ws --spa --port 58975 -z",
     "prettier": "prettier --write \"./src/**/*.{js,jsx}\"",
@@ -15,7 +15,7 @@
     "deploy": "run-s build deploy:copyindex deploy:copyreports deploy:upload",
     "deploy:copyindex": "cp dist/index.html dist/200.html",
     "deploy:copyreports": "cp -rv reports dist/reports",
-    "deploy:upload": "surge build toptal-nsisodiya.surge.sh",
+    "deploy:upload": "surge dist toptal-nsisodiya.surge.sh",
     "test1": "jest --coverage --updateSnapshot",
     "test:watch": "jest --watch",
     "lint:css": "stylelint \"./src/**/*.js\"",
@@ -31,6 +31,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "2.3.0",
     "antd": "4.5.3",
     "immer": "6.0.9",
     "loopobject": "1.1.0",

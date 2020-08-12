@@ -1,0 +1,100 @@
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  
+   ⚠️  Tailwind is not purging unused styles because no template paths have been provided.
+      If you have manually configured PurgeCSS outside of Tailwind or are deliberately not
+      removing unused styles, set `purge: false` in your Tailwind config file to silence
+      this warning.
+   
+      https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+✨  Built in 35.59s.
+
+dist/src.23bc882e.js                                            ⚠️  3.46 MB    33.99s
+├── node_modules/@ant-design/icons/es/icons/index.js             125.76 KB     3.61s
+├── node_modules/react-dom/cjs/react-dom.production.min.js        114.4 KB     4.47s
+├── node_modules/moment/moment.js                                 57.67 KB     3.80s
+├── node_modules/antd/es/result/serverError.js                    16.93 KB     2.79s
+├── node_modules/immer/dist/immer.esm.js                          16.16 KB     2.57s
+├── node_modules/@ant-design/react-slick/lib/inner-slider.js      15.49 KB    10.45s
+├── node_modules/antd/es/result/noFound.js                        14.64 KB     2.76s
+├── node_modules/rc-picker/es/RangePicker.js                      14.37 KB     9.99s
+├── node_modules/tinycolor2/tinycolor.js                          14.35 KB     6.77s
+├── node_modules/rc-tree/es/Tree.js                               14.17 KB     6.61s
+└── + 2516 more assets                                      
+
+dist/src.67455cf6.css                                            565.03 KB     8.41s
+├── src/css/tailwind.pcss                                          2.31 KB     8.40s
+├── node_modules/typeface-rubik/index.css                          1.77 KB     8.18s
+├── node_modules/antd/dist/antd.css                                   50 B     8.37s
+└── src/css/styles.css                                                 0 B     8.40s
+
+dist/rubik-latin-700italic.cfe17117.woff                          28.55 KB     249ms
+dist/rubik-latin-500italic.421df7a3.woff                           28.3 KB     179ms
+dist/rubik-latin-400italic.81100ec4.woff                          28.04 KB     180ms
+dist/rubik-latin-500.27b164e4.woff                                27.59 KB     180ms
+dist/rubik-latin-700.95b6ae21.woff                                27.55 KB     533ms
+dist/rubik-latin-900italic.14db9935.woff                          27.49 KB     249ms
+dist/rubik-latin-400.d7889865.woff                                26.87 KB     117ms
+dist/rubik-latin-300italic.31530ca9.woff                           26.6 KB     847ms
+dist/rubik-latin-900.11922323.woff                                26.46 KB     249ms
+dist/rubik-latin-300.925dde05.woff                                25.22 KB     117ms
+dist/rubik-latin-700italic.8aff6995.woff2                         23.34 KB     548ms
+dist/rubik-latin-500italic.e6f4dd99.woff2                         23.23 KB     179ms
+dist/rubik-latin-400italic.5bf23d2d.woff2                         22.87 KB     117ms
+dist/rubik-latin-500.7ab5092f.woff2                               22.63 KB     180ms
+dist/rubik-latin-700.b2b099cb.woff2                               22.59 KB     533ms
+dist/rubik-latin-900italic.c44243df.woff2                          22.2 KB     249ms
+dist/rubik-latin-400.181f8c8b.woff2                               22.13 KB     117ms
+dist/rubik-latin-300italic.f4467de0.woff2                         21.59 KB     515ms
+dist/rubik-latin-900.e5a9492a.woff2                               21.49 KB     249ms
+dist/rubik-latin-300.04d91329.woff2                                20.5 KB     118ms
+dist/favicon.67591151.ico                                          1.12 KB     565ms
+dist/index.html                                                      784 B     1.47s
+dist/root.4a69a2e1.css                                               257 B     8.56s
