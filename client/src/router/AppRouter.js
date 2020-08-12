@@ -31,15 +31,20 @@ function generateRoutes(compArray) {
     );
   });
 }
+function loadAllComponents(compArray) {
+  return compArray.map((v) => {
+    const name = v.displayName;
+    const slug = `/components/${paramCase(name)}`;
+    return <SimpleComponentViewer key={slug} comp={v} />;
+  });
+}
 export const AppRouter = function () {
   return (
     <Router>
       <div>
         <Switch>
           <Route exact path='/'>
-            <>
-              <AllStores />
-            </>
+            {loadAllComponents(allComponents)}
           </Route>
           <Route path='/artboard/'>
             <About />
