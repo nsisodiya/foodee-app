@@ -13,7 +13,7 @@ window.projectPath = '/home/narendra/Coding/toptal-assignment/narendra-sisodiya/
 
 var mountNode = document.getElementById('root');
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider style={{}} store={store}>
     <App />
   </Provider>,
   mountNode

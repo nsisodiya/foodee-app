@@ -4,7 +4,16 @@ import { SimpleComponentViewer } from './SimpleComponentViewer/SimpleComponentVi
 import { StoreViewer } from './StoreViewer/StoreViewer';
 import { StoreConnector } from './StoreConnector/StoreConnector';
 import { Rating } from './Rating/Rating';
+import { PageRegister } from './PageRegister/PageRegister';
 
-export { AllStores, Rating, DevLinks, SimpleComponentViewer, StoreViewer, StoreConnector };
+export {
+  AllStores,
+  PageRegister,
+  Rating,
+  DevLinks,
+  SimpleComponentViewer,
+  StoreViewer,
+  StoreConnector
+};
 
 // TODO - this file can be auto generated
