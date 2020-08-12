@@ -7,7 +7,7 @@ import { ConstantsViewer } from '../devtools/ConstantsViewer';
 import { UserRoleType } from '../constants/UserRoleType';
 
 function About() {
-  return <h1>About</h1>;
+  return <h3 className='m-10 p-10 text-center text-6xl'>About us Page</h3>;
 }
 
 function NoMatch() {
@@ -46,7 +46,7 @@ export const AppRouter = function () {
           <Route exact path='/'>
             {loadAllComponents(allComponents)}
           </Route>
-          <Route path='/artboard/'>
+          <Route path='/about/'>
             <About />
           </Route>
           <Route path='/constants/userroletype'>
