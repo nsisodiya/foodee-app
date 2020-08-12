@@ -6,10 +6,6 @@ import { AllStores, PageRegister, Rating, SimpleComponentViewer } from '../compo
 import { ConstantsViewer } from '../devtools/ConstantsViewer';
 import { UserRoleType } from '../constants/UserRoleType';
 
-function About() {
-  return <h3 className='m-10 p-10 text-center text-6xl'>About us Page</h3>;
-}
-
 function NoMatch() {
   return (
     <div>
@@ -17,7 +13,7 @@ function NoMatch() {
     </div>
   );
 }
-const allComponents = [AllStores, Rating];
+const allComponents = [AllStores, PageRegister, Rating];
 
 function generateRoutes(compArray) {
   return compArray.map((v) => {
@@ -44,9 +40,6 @@ export const AppRouter = function () {
       <Switch>
         <Route exact path='/'>
           {loadAllComponents(allComponents)}
-        </Route>
-        <Route path='/about/'>
-          <About />
         </Route>
         <Route path='/register/'>
           <PageRegister />

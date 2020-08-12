@@ -63,7 +63,7 @@ export const RegisterStore = createReducer({
         errorMessage: ''
       }
     },
-    isFormValid: true,
+    isFormValid: false,
     xhr: {
       create: {
         status: XHR_STATUS.XHR_NOT_STARTED,
@@ -92,14 +92,13 @@ export const RegisterStore = createReducer({
       return;
     }
     state.xhr.create.status = XHR_STATUS.XHR_IN_PROGRESS;
-    const { email, password } = state.fields;
     (async () => {
       try {
         const resraw = await fetch(`${process.env.API_URL}/auth/register`, {
           method: 'POST',
           body: JSON.stringify({
-            email,
-            password
+            email: state.fields.email.val,
+            password: state.fields.password.val
           }),
           headers: getHeaders()
         });
@@ -125,6 +124,9 @@ export const RegisterStore = createReducer({
         }
       } catch (error) {
         console.error('Catch Error: RegisterStore -> createAccount', error);
+        actions.RegisterStore.createAccountFailure({
+          errorMessage: error
+        });
       }
     })();
   },

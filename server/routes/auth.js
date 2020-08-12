@@ -49,10 +49,10 @@ router.post('/register', async function (req, res, next) {
       id: dbUser.id
     });
   } catch (err) {
-    console.log('There was an error querying users', JSON.stringify(err));
+    console.log('There was an error /register', JSON.stringify(err));
     return res.send({
       error: true,
-      message: err.name
+      errorMessage: err.name
     });
   }
 });
@@ -88,7 +88,7 @@ router.post('/login', async (req, res, next) => {
       res.json({ error: true, message: 'Invalid email or password' });
     }
   } catch (err) {
-    console.log('There was an error querying users', err, JSON.stringify(err));
+    console.log('There was an error /login', err, JSON.stringify(err));
     return res.json({
       error: true,
       fullError: err,

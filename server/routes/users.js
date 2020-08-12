@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
     const users = await db.User.findAll();
     res.json(users);
   } catch (err) {
-    console.log('There was an error querying users', JSON.stringify(err));
+    console.log('There was an error /', JSON.stringify(err));
     return res.send(err);
   }
 });
