@@ -1,0 +1,8 @@
+.cache
+node_modules
+dist
+public
+.history
+build
+README.md
+.npm
