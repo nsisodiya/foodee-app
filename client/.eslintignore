@@ -1,0 +1,11 @@
+node_modules
+ignore.js
+dist
+.cache
+public
+build
+.env
+.terraform
+coverage
+storybook-static
+.npm
