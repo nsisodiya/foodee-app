@@ -64,11 +64,14 @@ export const RegisterStore = createReducer({
       }
     },
     isFormValid: true,
-    createXhrStatus: {
-      xhrStatus: XHR_STATUS.XHR_NOT_STARTED,
-      error: null,
-      statusCode: '',
-      statusText: ''
+    xhr: {
+      create: {
+        status: XHR_STATUS.XHR_NOT_STARTED,
+        error: null,
+        statusCode: '',
+        statusText: '',
+        errorMessage: ''
+      }
     }
   },
   editEmailVal(state, val) {
@@ -88,7 +91,7 @@ export const RegisterStore = createReducer({
     if (state.isFormValid === false) {
       return;
     }
-    state.createXhrStatus.xhrStatus = XHR_STATUS.XHR_IN_PROGRESS;
+    state.xhr.create.status = XHR_STATUS.XHR_IN_PROGRESS;
     const { email, password } = state.fields;
     (async () => {
       try {
@@ -105,7 +108,8 @@ export const RegisterStore = createReducer({
         if (statusCode < HttpCodes.OK200 || statusCode >= HttpCodes.MULTIPLE_CHOICES) {
           actions.RegisterStore.createAccountFailure({
             statusCode,
-            statusText
+            statusText,
+            errorMessage: 'Something wrong with server API'
           });
           return;
         }
@@ -113,7 +117,8 @@ export const RegisterStore = createReducer({
         if (res.error === true) {
           actions.RegisterStore.createAccountFailure({
             statusCode,
-            statusText: res.errorMessage
+            statusText,
+            errorMessage: res.errorMessage
           });
         } else {
           actions.RegisterStore.createAccountSuccess(res);
@@ -123,15 +128,18 @@ export const RegisterStore = createReducer({
       }
     })();
   },
-  createAccountSuccess(/*state, res*/) {
-    //TODO - Account is successfully created.
+  createAccountSuccess(state /*, res*/) {
+    state.xhr.create.status = XHR_STATUS.XHR_IN_SUCCESS;
+    state.xhr.create.successMessage = 'Your account successfully created';
+    //TODO - save Token from server and redirect to "/"
     //TODO - show UI message that - res.successMessage
-    //Navigate Page to Login.
+    //TODO - Redirect to /Login
   },
-  createAccountFailure(state, { statusCode, statusText }) {
-    state.createXhrStatus.xhrStatus = XHR_STATUS.XHR_IN_ERROR;
-    state.createXhrStatus.statusCode = statusCode;
-    state.createXhrStatus.statusText = statusText;
+  createAccountFailure(state, { statusCode, statusText, errorMessage }) {
+    state.xhr.create.status = XHR_STATUS.XHR_IN_ERROR;
+    state.xhr.create.statusCode = statusCode;
+    state.xhr.create.statusText = statusText;
+    state.xhr.create.errorMessage = errorMessage;
     console.error(
       `XHR failed - RegisterStore:CreateAccount. StatusCode-${statusCode}, StatusText- ${statusText}`
     );
