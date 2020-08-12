@@ -1,8 +1,8 @@
 import React from 'react';
 import css from 'css-template';
 import PropTypes from 'prop-types';
-import { Container } from './Rating.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
+import { Container } from './Rating.styled';
 
 const mtop30 = css`
   margin-top: 30px;

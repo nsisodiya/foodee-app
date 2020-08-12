@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { AppRouter } from './router/AppRouter';
 import { Tag } from 'antd';
 import {
   TwitterOutlined,
@@ -8,6 +7,7 @@ import {
   FacebookOutlined,
   LinkedinOutlined
 } from '@ant-design/icons';
+import { AppRouter } from './router/AppRouter';
 
 function oldCode() {
   return (
@@ -40,6 +40,8 @@ function oldCode() {
     </>
   );
 }
+
+oldCode();
 export class App extends Component {
   render() {
     return (
