@@ -1,3 +1,3 @@
 ```
-npm install parcel-bundler npm-run-all
+npm install parcel-bundler npm-run-all postcss-modules
 ```;
