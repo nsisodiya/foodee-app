@@ -7,6 +7,21 @@ import { HttpCodes } from '../utils/HttpCodes';
 import { actions } from './actions';
 
 const fieldMetaData = {
+  name: {
+    validator(val) {
+      const error = !isLength(val, {
+        min: 1
+      });
+      let errorMessage = '';
+      if (error) {
+        errorMessage = 'Name should not be empty';
+      }
+      return {
+        error,
+        errorMessage
+      };
+    }
+  },
   email: {
     validator(val) {
       const error = !isEmail(val);
@@ -38,9 +53,11 @@ const fieldMetaData = {
 };
 
 const calculateIsFormValid = (state) => {
-  const v1 = fieldMetaData.email.validator(state.fields.email.val);
-  const v2 = fieldMetaData.password.validator(state.fields.password.val);
-  return v1.error === false && v2.error === false;
+  var r = true;
+  Object.keys(fieldMetaData).forEach((v) => {
+    r = r && fieldMetaData[v].validator(state.fields[v].val).error === false;
+  });
+  return r;
 };
 
 const validate = (state, field, val) => {
@@ -52,6 +69,11 @@ export const RegisterStore = createReducer({
   namespace: 'RegisterStore',
   initialState: {
     fields: {
+      name: {
+        val: '',
+        error: false,
+        errorMessage: ''
+      },
       email: {
         val: '',
         error: false,
@@ -74,14 +96,21 @@ export const RegisterStore = createReducer({
       }
     }
   },
+  editNameVal(state, val) {
+    //TODO - combine all edit methods
+    var { name } = state.fields;
+    name.val = val;
+    validate(state, 'name', val);
+    state.isFormValid = calculateIsFormValid(state);
+  },
   editEmailVal(state, val) {
-    var email = state.fields.email;
+    var { email } = state.fields;
     email.val = val;
     validate(state, 'email', val);
     state.isFormValid = calculateIsFormValid(state);
   },
   editPasswordVal(state, val) {
-    var password = state.fields.password;
+    var { password } = state.fields;
     password.val = val;
     validate(state, 'password', val);
     state.isFormValid = calculateIsFormValid(state);
@@ -97,6 +126,7 @@ export const RegisterStore = createReducer({
         const resraw = await fetch(`${process.env.API_URL}/auth/register`, {
           method: 'POST',
           body: JSON.stringify({
+            name: state.fields.name.val,
             email: state.fields.email.val,
             password: state.fields.password.val
           }),
