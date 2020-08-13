@@ -13,7 +13,7 @@ exports.getAllUsers = async () => {
   }
 };
 
-// Get single User by ID
+// Get single User by email
 exports.findUserByEmail = async ({ email }) => {
   try {
     const userInst = await User.findOne({ email });
@@ -23,11 +23,11 @@ exports.findUserByEmail = async ({ email }) => {
   }
 };
 
-// Add a new User
-exports.addUser = async ({ name, email, password, role }) => {
+// Create a new User
+exports.createUser = async ({ name, email, password, role }) => {
   //TODO validate
   try {
-    console.log('Adding new User', User);
+    console.log('Creating new User', User);
     const userInst = new User({ name, email, password, role });
     return userInst.save();
   } catch (err) {
@@ -35,23 +35,10 @@ exports.addUser = async ({ name, email, password, role }) => {
   }
 };
 
-// Update an existing User
-exports.updateUser = async (req) => {
-  try {
-    const id = req.params.id;
-    const userInst = req.body;
-    const { ...updateData } = userInst;
-    const update = await User.findByIdAndUpdate(id, updateData, { new: true });
-    return update;
-  } catch (err) {
-    throw boom.boomify(err);
-  }
-};
-
 // Delete a User
-exports.deleteUser = async ({ id }) => {
+exports.deleteUser = async (_id) => {
   try {
-    const userInst = await User.findByIdAndRemove({ _id: id });
+    const userInst = await User.findByIdAndRemove({ _id });
     return userInst;
   } catch (err) {
     throw boom.boomify(err);

@@ -10,7 +10,7 @@ const UserController = require('../models/UserController.js');
 
     1. [x] List All User
     2. [ ] Make a normal User as Admin
-    3. [ ] Delete a User
+    3. [x] Delete a User
     4. [ ] Modify any info of a user
 ============================*/
 
@@ -26,10 +26,10 @@ router.get('/', async (req, res) => {
 });
 
 /* get All Users */
-router.delete('/:id', async (req, res) => {
+router.delete('/:_id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await UserController.deleteUser({ id });
+    const { _id } = req.params;
+    const user = await UserController.deleteUser(_id);
     if (user === null) {
       return res.json({
         user,

@@ -16,7 +16,7 @@ router.post('/register', async function (req, res) {
       return;
     }
     var role = 'REGULAR';
-    const dbUser = await UserController.addUser({
+    const dbUser = await UserController.createUser({
       name,
       role,
       email,
