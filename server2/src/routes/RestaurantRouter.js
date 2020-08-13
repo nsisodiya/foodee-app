@@ -8,11 +8,11 @@ const RestaurantController = require('../models/RestaurantController.js');
 
     Admin should be able
 
-    1. [ ] Create a restaurant
-    2. [ ] get a restaurant
-    3. [ ] get all restaurants
-    3. [ ] Update a restaurant
-    4. [ ] Delete a restaurant
+    1. [x] Create a restaurant
+    2. [x] get a restaurant
+    3. [x] get all restaurants
+    3. [x] Update a restaurant
+    4. [x] Delete a restaurant
 ============================*/
 
 /* get All Restaurants */
