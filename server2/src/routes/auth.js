@@ -8,9 +8,14 @@ var router = express.Router();
 const privateKey = 'TODO-get it from somewhere';
 
 router.post('/register', async function (req, res) {
-  const { name, email, password } = req.body;
-  var role = 'REGULAR';
   try {
+    const { name, email, password } = req.body;
+    const user = await UserController.findUserByEmail({ email });
+    if (user !== null) {
+      res.json({ error: true, errorMessage: 'Email is already registered' });
+      return;
+    }
+    var role = 'REGULAR';
     const dbUser = await UserController.addUser({
       name,
       role,
@@ -33,7 +38,7 @@ router.post('/login', async function (req, res) {
     console.log('finding one', email);
     const user = await UserController.findUserByEmail({ email });
     if (user === null) {
-      res.json({ error: true, errorMessage: 'Invalid email or password' });
+      res.json({ error: true, errorMessage: 'Email is not registered' });
       return;
     }
     if (user.password === password) {
@@ -45,7 +50,7 @@ router.post('/login', async function (req, res) {
     } else {
       res.json({
         error: true,
-        errorMessage: 'Invalid email or password.'
+        errorMessage: 'Invalid Password.'
       });
     }
   } catch (err) {
