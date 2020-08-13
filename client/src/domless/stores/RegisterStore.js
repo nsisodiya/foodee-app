@@ -99,6 +99,7 @@ export const RegisterStore = createReducer({
         errorMessage: ''
       }
     },
+    submitBtnText: 'Create Account',
     isFormValid: true,
     xhr: {
       create: {

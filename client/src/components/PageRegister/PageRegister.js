@@ -1,11 +1,11 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Button } from 'antd';
 import css from 'css-template';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
-import { iff } from '../../utils/iff';
 import { Container } from './PageRegister.styled';
+import { generateFormItem } from './generateFormItem';
 // Open - http://localhost:1234/components/page-register
 // Open - http://localhost:6006/?path=/story/components-pageregister--normal
 
@@ -27,42 +27,6 @@ const onFinishFailed = (errorInfo) => {
   console.error('Failed:', errorInfo);
 };
 
-const generateFormItem = (state, field) => {
-  return (
-    <Form.Item
-      label={state.fields[field].label}
-      required={state.fields[field].required}
-      validateStatus={iff(state.fields[field].error, 'error', null)}
-      name={field}
-      help={iff(state.fields[field].error, state.fields[field].errorMessage, null)}>
-      {iff(
-        state.fields[field].subType === 'password',
-        () => {
-          return (
-            <Input.Password
-              value={state.fields[field].val}
-              placeholder={state.fields[field].placeholder}
-              onChange={(event) => {
-                actions.RegisterStore.editFormField(field, event.target.value);
-              }}
-            />
-          );
-        },
-        () => {
-          return (
-            <Input
-              value={state.fields[field].val}
-              placeholder={state.fields[field].placeholder}
-              onChange={(event) => {
-                actions.RegisterStore.editFormField(field, event.target.value);
-              }}
-            />
-          );
-        }
-      )}
-    </Form.Item>
-  );
-};
 export const PageRegister = function () {
   return (
     <Container data-file={filePath} className='p-3 bg-white'>
@@ -89,7 +53,7 @@ export const PageRegister = function () {
 
                   <Form.Item {...tailLayout}>
                     <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
-                      Create Account
+                      {state.submitBtnText}
                     </Button>
                   </Form.Item>
                 </Form>
