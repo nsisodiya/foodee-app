@@ -1,6 +1,7 @@
 import { createReducer } from 'redux-wow';
 import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
+import { message } from 'antd';
 import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { getHeaders } from '../utils/getHeaders';
 import { HttpCodes } from '../utils/HttpCodes';
@@ -88,6 +89,7 @@ export const RegisterStore = createReducer({
       }
     },
     submitBtnText: 'Create Account',
+    apiUrl: '/auth/register',
     isFormValid: true,
     xhr: {
       create: {
@@ -113,7 +115,7 @@ export const RegisterStore = createReducer({
     state.xhr.create.status = XHR_STATUS.XHR_IN_PROGRESS;
     (async () => {
       try {
-        const resraw = await fetch(`${process.env.API_URL}/auth/register`, {
+        const resraw = await fetch(`${process.env.API_URL}${state.apiUrl}`, {
           method: 'POST',
           body: JSON.stringify({
             name: state.fields.name.val,
@@ -153,6 +155,11 @@ export const RegisterStore = createReducer({
   createAccountSuccess(state /*, res*/) {
     state.xhr.create.status = XHR_STATUS.XHR_IN_SUCCESS;
     state.xhr.create.successMessage = 'Your account successfully created';
+    message.success(state.xhr.create.successMessage);
+    const timeout = 1000;
+    window.setTimeout(() => {
+      window.location = '/login';
+    }, timeout);
     //TODO - save Token from server and redirect to "/"
     //TODO - show UI message that - res.successMessage
     //TODO - Redirect to /Login
@@ -162,6 +169,7 @@ export const RegisterStore = createReducer({
     state.xhr.create.statusCode = statusCode;
     state.xhr.create.statusText = statusText;
     state.xhr.create.errorMessage = errorMessage;
+    message.error(state.xhr.create.errorMessage);
     console.error(
       `XHR failed - RegisterStore:CreateAccount. StatusCode-${statusCode}, StatusText- ${statusText}`
     );

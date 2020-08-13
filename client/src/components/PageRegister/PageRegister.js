@@ -28,6 +28,8 @@ const onFinishFailed = (errorInfo) => {
 };
 
 export const PageRegister = function () {
+  //message.success('This is a success message');
+
   return (
     <Container data-file={filePath} className='p-3 bg-white'>
       <StoreConnector
