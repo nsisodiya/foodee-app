@@ -1,0 +1,8 @@
+mongo --authenticationDatabase toptal -u admin -p password
+
+
+> use toptal;
+> db.users.find()
+
+// Set a use admin;
+> db.users.updateOne({email:'n1@gmail.com'}, {$set:{role: 'ADMIN'}})
