@@ -3,8 +3,9 @@ import { Form, Input, Button } from 'antd';
 import css from 'css-template';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
+import { actions } from '../../domless/stores/actions';
+import { iff } from '../../utils/iff';
 import { Container } from './PageRegister.styled';
-
 // Open - http://localhost:1234/components/page-register
 // Open - http://localhost:6006/?path=/story/components-pageregister--normal
 
@@ -24,6 +25,43 @@ const onFinish = (values) => {
 const onFinishFailed = (errorInfo) => {
   console.error('Failed:', errorInfo);
 };
+
+const generateFormItem = (state, field) => {
+  return (
+    <Form.Item
+      label={state.fields[field].label}
+      required={state.fields[field].required}
+      validateStatus={iff(state.fields[field].error, 'error', null)}
+      name={field}
+      help={iff(state.fields[field].error, state.fields[field].errorMessage, null)}>
+      {iff(
+        state.fields[field].subType === 'password',
+        () => {
+          return (
+            <Input.Password
+              value={state.fields[field].val}
+              placeholder={state.fields[field].placeholder}
+              onChange={(event) => {
+                actions.RegisterStore.editFormField(field, event.target.value);
+              }}
+            />
+          );
+        },
+        () => {
+          return (
+            <Input
+              value={state.fields[field].val}
+              placeholder={state.fields[field].placeholder}
+              onChange={(event) => {
+                actions.RegisterStore.editFormField(field, event.target.value);
+              }}
+            />
+          );
+        }
+      )}
+    </Form.Item>
+  );
+};
 export const PageRegister = function () {
   return (
     <Container data-file={filePath} className='p-3 bg-white'>
@@ -34,7 +72,6 @@ export const PageRegister = function () {
             <>
               <h1>Welcome to Restaurant Review</h1>
               <h1>Create Your Account</h1>
-              <p>{state.fields.email.val}</p>
               <div
                 style={css`
                   width: 50%;
@@ -45,19 +82,10 @@ export const PageRegister = function () {
                   initialValues={{ remember: true }}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}>
-                  <Form.Item
-                    label='Email'
-                    name='email'
-                    rules={[{ required: true, message: 'Please input your email!' }]}>
-                    <Input />
-                  </Form.Item>
+                  {generateFormItem(state, 'name')}
+                  {generateFormItem(state, 'email')}
+                  {generateFormItem(state, 'password')}
 
-                  <Form.Item
-                    label='Password'
-                    name='password'
-                    rules={[{ required: true, message: 'Please input your password!' }]}>
-                    <Input.Password />
-                  </Form.Item>
                   <Form.Item {...tailLayout}>
                     <Button type='primary' htmlType='submit'>
                       Create Account

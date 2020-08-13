@@ -8,9 +8,6 @@ import { actions } from './actions';
 
 const fieldMetaData = {
   name: {
-    placeholder: 'Name',
-    label: 'Name',
-    type: 'inputText',
     validator(val) {
       const error = !isLength(val, {
         min: 1
@@ -26,10 +23,6 @@ const fieldMetaData = {
     }
   },
   email: {
-    placeholder: 'email@example',
-    label: 'Email',
-    type: 'inputText',
-    subType: 'email',
     validator(val) {
       const error = !isEmail(val);
       let errorMessage = '';
@@ -43,10 +36,6 @@ const fieldMetaData = {
     }
   },
   password: {
-    placeholder: '',
-    label: 'Passowrd',
-    type: 'inputText',
-    subType: 'password',
     validator(val) {
       const error = !isLength(val, {
         min: 4
@@ -81,16 +70,30 @@ export const RegisterStore = createReducer({
   initialState: {
     fields: {
       name: {
+        placeholder: 'Name',
+        label: 'Name',
+        required: true,
+        type: 'inputText',
         val: '',
         error: false,
         errorMessage: ''
       },
       email: {
+        placeholder: 'email@example',
+        label: 'Email',
+        required: true,
+        type: 'inputText',
+        subType: 'email',
         val: '',
         error: false,
         errorMessage: ''
       },
       password: {
+        placeholder: '',
+        required: true,
+        label: 'Passowrd',
+        type: 'inputText',
+        subType: 'password',
         val: '',
         error: false,
         errorMessage: ''
@@ -107,26 +110,12 @@ export const RegisterStore = createReducer({
       }
     }
   },
-  editNameVal(state, val) {
-    //TODO - combine all edit methods
-    var { name } = state.fields;
-    name.val = val;
-    validate(state, 'name', val);
+  editFormField(state, field, val) {
+    var obj = state.fields[field];
+    obj.val = val;
+    validate(state, field, val);
     state.isFormValid = calculateIsFormValid(state);
   },
-  editEmailVal(state, val) {
-    var { email } = state.fields;
-    email.val = val;
-    validate(state, 'email', val);
-    state.isFormValid = calculateIsFormValid(state);
-  },
-  editPasswordVal(state, val) {
-    var { password } = state.fields;
-    password.val = val;
-    validate(state, 'password', val);
-    state.isFormValid = calculateIsFormValid(state);
-  },
-
   createAccount(state) {
     if (state.isFormValid === false) {
       return;
