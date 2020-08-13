@@ -1,32 +1,44 @@
 const mongoose = require('mongoose');
 
-var RestaurantSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
+var RestaurantSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    address: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    cuisines: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    imageurl: {
+      type: String,
+      trim: true
+    },
+    hours: {
+      type: String,
+      trim: true
+    },
+    website: {
+      type: String,
+      trim: true
+    },
+    phone: {
+      type: String,
+      trim: true
+    }
   },
-  address: {
-    type: String,
-    required: true
-  },
-  cuisines: {
-    type: String,
-    required: true
-  },
-  imageurl: {
-    type: String,
-    required: true
-  },
-  hours: {
-    type: String
-  },
-  website: {
-    type: String
-  },
-  phone: {
-    type: String
+  {
+    strict: true,
+    versionKey: false
   }
-});
+);
 var Restaurant = mongoose.model('Restaurant', RestaurantSchema);
 console.log('Create Restaurant Schema');
 module.exports = Restaurant;
