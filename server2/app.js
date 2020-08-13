@@ -4,7 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var connectDB = require('./db/db.js');
 
+/**  Let first connect to dB ***/
+
+(async () => {
+  await connectDB();
+  console.log('Here - Await is over');
+})();
 
 var app = express();
 
