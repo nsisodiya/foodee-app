@@ -72,7 +72,7 @@ router.post('/login', async (req, res, next) => {
     console.log('finding one', email);
     const user = await db.User.findOne({ where: { email } });
     if (user === null) {
-      res.json({ error: true, message: 'Invalid email or password' });
+      res.json({ error: true, errorMessage: 'Invalid email or password' });
     }
     if (user.password === password) {
       const token = jwt.sign(
@@ -85,7 +85,10 @@ router.post('/login', async (req, res, next) => {
 
       res.json({ token, login: 'okay' });
     } else {
-      res.json({ error: true, message: 'Invalid email or password' });
+      res.json({
+        error: true,
+        errorMessage: 'Invalid email or password'
+      });
     }
   } catch (err) {
     console.log('There was an error /login', err, JSON.stringify(err));

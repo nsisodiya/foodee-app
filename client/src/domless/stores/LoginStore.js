@@ -8,22 +8,7 @@ import { HttpCodes } from '../utils/HttpCodes';
 import { actions } from './actions';
 import { formUtil } from './formUtil';
 
-export const fieldMetaData = {
-  name: {
-    validator(val) {
-      const error = !isLength(val, {
-        min: 1
-      });
-      let errorMessage = '';
-      if (error) {
-        errorMessage = 'Name should not be empty';
-      }
-      return {
-        error,
-        errorMessage
-      };
-    }
-  },
+const fieldMetaData = {
   email: {
     validator(val) {
       const error = !isEmail(val);
@@ -54,20 +39,10 @@ export const fieldMetaData = {
   }
 };
 
-export const RegisterStore = createReducer({
-  namespace: 'RegisterStore',
+export const LoginStore = createReducer({
+  namespace: 'LoginStore',
   initialState: {
     fields: {
-      name: {
-        placeholder: 'Name',
-        label: 'Name',
-        required: true,
-        type: 'inputText',
-        subType: 'text',
-        val: '',
-        error: false,
-        errorMessage: ''
-      },
       email: {
         placeholder: 'email@example',
         label: 'Email',
@@ -89,8 +64,8 @@ export const RegisterStore = createReducer({
         errorMessage: ''
       }
     },
-    submitBtnText: 'Create Account',
-    apiUrl: '/auth/register',
+    submitBtnText: 'Login',
+    apiUrl: '/auth/login',
     isFormValid: true,
     xhr: {
       create: {
@@ -108,7 +83,7 @@ export const RegisterStore = createReducer({
     formUtil.validate(state, field, val, fieldMetaData);
     state.isFormValid = formUtil.calculateIsFormValid(state, fieldMetaData);
   },
-  createAccount(state) {
+  loginAccount(state) {
     state.isFormValid = formUtil.calculateIsFormValid(state, fieldMetaData);
     if (state.isFormValid === false) {
       return;
@@ -119,7 +94,6 @@ export const RegisterStore = createReducer({
         const resraw = await fetch(`${process.env.API_URL}${state.apiUrl}`, {
           method: 'POST',
           body: JSON.stringify({
-            name: state.fields.name.val,
             email: state.fields.email.val,
             password: state.fields.password.val
           }),
@@ -128,7 +102,7 @@ export const RegisterStore = createReducer({
         const { status: statusCode, statusText } = resraw;
         // Status is less than 200 and greater than equal to 300.
         if (statusCode < HttpCodes.OK200 || statusCode >= HttpCodes.MULTIPLE_CHOICES) {
-          actions.RegisterStore.createAccountFailure({
+          actions.LoginStore.loginAccountFailure({
             statusCode,
             statusText,
             errorMessage: 'Something wrong with server API'
@@ -137,42 +111,40 @@ export const RegisterStore = createReducer({
         }
         const res = await resraw.json();
         if (res.error === true) {
-          actions.RegisterStore.createAccountFailure({
+          actions.LoginStore.loginAccountFailure({
             statusCode,
             statusText,
             errorMessage: res.errorMessage
           });
         } else {
-          actions.RegisterStore.createAccountSuccess(res);
+          actions.LoginStore.loginAccountSuccess(res);
         }
       } catch (error) {
-        console.error('Catch Error: RegisterStore -> createAccount', error);
-        actions.RegisterStore.createAccountFailure({
+        console.error('Catch Error: LoginStore -> loginAccount', error);
+        actions.LoginStore.loginAccountFailure({
           errorMessage: error
         });
       }
     })();
   },
-  createAccountSuccess(state /*, res*/) {
+  loginAccountSuccess(state, res) {
     state.xhr.create.status = XHR_STATUS.XHR_IN_SUCCESS;
-    state.xhr.create.successMessage = 'Your account successfully created';
+    state.xhr.create.successMessage = 'Login Successful';
     message.success(state.xhr.create.successMessage);
+    localStorage.setItem('token', res.token);
     const timeout = 1000;
     window.setTimeout(() => {
-      window.location = '/login';
+      window.location = '/';
     }, timeout);
-    //TODO - save Token from server and redirect to "/"
-    //TODO - show UI message that - res.successMessage
-    //TODO - Redirect to /Login
   },
-  createAccountFailure(state, { statusCode, statusText, errorMessage }) {
+  loginAccountFailure(state, { statusCode, statusText, errorMessage }) {
     state.xhr.create.status = XHR_STATUS.XHR_IN_ERROR;
     state.xhr.create.statusCode = statusCode;
     state.xhr.create.statusText = statusText;
     state.xhr.create.errorMessage = errorMessage;
     message.error(state.xhr.create.errorMessage);
     console.error(
-      `XHR failed - RegisterStore:CreateAccount. StatusCode-${statusCode}, StatusText- ${statusText}`
+      `XHR failed - LoginStore:loginAccount. StatusCode-${statusCode}, StatusText- ${statusText}`
     );
   }
 });

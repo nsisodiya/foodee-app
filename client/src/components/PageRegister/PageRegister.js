@@ -49,9 +49,9 @@ export const PageRegister = function () {
                   initialValues={{ remember: true }}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}>
-                  {generateFormItem(state, 'name')}
-                  {generateFormItem(state, 'email')}
-                  {generateFormItem(state, 'password')}
+                  {generateFormItem(state, 'name', actions.RegisterStore)}
+                  {generateFormItem(state, 'email', actions.RegisterStore)}
+                  {generateFormItem(state, 'password', actions.RegisterStore)}
 
                   <Form.Item {...tailLayout}>
                     <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>

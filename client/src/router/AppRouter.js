@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import React from 'react';
 import { paramCase } from 'change-case';
-import { AllStores, PageRegister, Rating, SimpleComponentViewer } from '../components';
+import { AllStores, PageRegister, Rating, SimpleComponentViewer, PageLogin } from '../components';
 
 import { ConstantsViewer } from '../devtools/ConstantsViewer';
 import { UserRoleType } from '../constants/UserRoleType';
@@ -13,7 +13,7 @@ function NoMatch() {
     </div>
   );
 }
-const allComponents = [AllStores, PageRegister, Rating];
+const allComponents = [AllStores, PageRegister, PageLogin, Rating];
 
 function generateRoutes(compArray) {
   return compArray.map((v) => {
@@ -43,6 +43,9 @@ export const AppRouter = function () {
         </Route>
         <Route path='/register/'>
           <PageRegister />
+        </Route>
+        <Route path='/login/'>
+          <PageLogin />
         </Route>
         <Route path='/constants/userroletype'>
           <ConstantsViewer data={UserRoleType} name='UserRoleType' />

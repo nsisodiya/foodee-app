@@ -1,9 +1,8 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { actions } from '../../domless/stores/actions';
 import { iff } from '../../utils/iff';
 
-export const generateFormItem = (state, field) => {
+export const generateFormItem = (state, field, store) => {
   return (
     <Form.Item
       label={state.fields[field].label}
@@ -19,7 +18,7 @@ export const generateFormItem = (state, field) => {
               value={state.fields[field].val}
               placeholder={state.fields[field].placeholder}
               onChange={(event) => {
-                actions.RegisterStore.editFormField(field, event.target.value);
+                store.editFormField(field, event.target.value);
               }}
             />
           );
@@ -30,7 +29,7 @@ export const generateFormItem = (state, field) => {
               value={state.fields[field].val}
               placeholder={state.fields[field].placeholder}
               onChange={(event) => {
-                actions.RegisterStore.editFormField(field, event.target.value);
+                store.editFormField(field, event.target.value);
               }}
             />
           );
