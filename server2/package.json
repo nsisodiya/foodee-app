@@ -5,8 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www | pino-colada",
     "devstart": "cross-env NODE_ENV=development DEPLOY_ENV=local nodemon --inspect=0.0.0.0:9229 src/server.js | pino-colada",
-    "dbstart": "sudo docker-compose up -d",
-    "dbstop": "sudo docker-compose down"
+    "dbstart": "sudo docker-compose -f db/docker-compose.yml up -d",
+    "dbstop": "sudo docker-compose -f db/docker-compose.yml down"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
