@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --inspect=0.0.0.0:9229 ./src/bin/www",
+    "start": "nodemon --inspect ./src/bin/www",
     "prodstart": "node /src/bin/www",
     "starts": "nodemon ./src/bin/www | pino-colada",
     "dbstart": "sudo docker-compose -f db/docker-compose.yml up -d",
