@@ -20,6 +20,7 @@ const tailLayout = {
 };
 const onFinish = (values) => {
   console.error('Success:', values);
+  actions.RegisterStore.createAccount();
 };
 
 const onFinishFailed = (errorInfo) => {
@@ -87,7 +88,7 @@ export const PageRegister = function () {
                   {generateFormItem(state, 'password')}
 
                   <Form.Item {...tailLayout}>
-                    <Button type='primary' htmlType='submit'>
+                    <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
                       Create Account
                     </Button>
                   </Form.Item>

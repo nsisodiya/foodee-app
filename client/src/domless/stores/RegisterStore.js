@@ -99,7 +99,7 @@ export const RegisterStore = createReducer({
         errorMessage: ''
       }
     },
-    isFormValid: false,
+    isFormValid: true,
     xhr: {
       create: {
         status: XHR_STATUS.XHR_NOT_STARTED,
@@ -117,6 +117,7 @@ export const RegisterStore = createReducer({
     state.isFormValid = calculateIsFormValid(state);
   },
   createAccount(state) {
+    state.isFormValid = calculateIsFormValid(state);
     if (state.isFormValid === false) {
       return;
     }
