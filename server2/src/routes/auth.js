@@ -1,5 +1,5 @@
 var express = require('express');
-const { v4: uuidv4 } = require('uuid');
+//const { v4: uuidv4 } = require('uuid');
 var UserController = require('../models/UserController');
 
 var router = express.Router();
@@ -13,7 +13,6 @@ router.post('/register', async function (req, res) {
   var role = 'REGULAR';
   try {
     const dbUser = await UserController.addUser({
-      id: uuidv4(),
       name,
       role,
       email,
@@ -26,10 +25,10 @@ router.post('/register', async function (req, res) {
       id: dbUser.id
     });
   } catch (err) {
-    console.error('There was an error /register', JSON.stringify(err));
+    console.error('There was an error /register', err, JSON.stringify(err));
     return res.send({
       error: true,
-      errorMessage: err.name
+      errorMessage: err
     });
   }
 });

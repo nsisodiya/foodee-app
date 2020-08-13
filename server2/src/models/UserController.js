@@ -25,10 +25,11 @@ exports.getSingleUser = async (req) => {
 };
 
 // Add a new User
-exports.addUser = async (req) => {
+exports.addUser = async ({ name, email, password, role }) => {
+  //TODO validate
   try {
     console.log('Adding new User', User);
-    const userInst = new User(req.body);
+    const userInst = new User({ name, email, password, role });
     return userInst.save();
   } catch (err) {
     throw boom.boomify(err);
