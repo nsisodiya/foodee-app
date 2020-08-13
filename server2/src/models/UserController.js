@@ -14,10 +14,9 @@ exports.getAllUsers = async () => {
 };
 
 // Get single User by ID
-exports.getSingleUser = async (req) => {
+exports.findUserByEmail = async ({ email }) => {
   try {
-    const id = req.params.id;
-    const userInst = await User.findById(id);
+    const userInst = await User.findOne({ email });
     return userInst;
   } catch (err) {
     throw boom.boomify(err);

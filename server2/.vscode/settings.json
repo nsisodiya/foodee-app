@@ -1,4 +1,5 @@
 {
+  "debug.node.autoAttach": "on",
   "eslint.options": {
     "configFile": "eslintrc.js"
   }

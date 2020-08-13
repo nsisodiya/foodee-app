@@ -4,7 +4,7 @@ var rootRouter = require('./root');
 var usersRouter = require('./users');
 var authRouter = require('./auth');
 // var reviewsRouter = require('./reviews');
-// var meRouter = require('./me');
+var meRouter = require('./me');
 
 const privateKey = 'TODO-get it from somewhere';
 
@@ -64,5 +64,5 @@ module.exports = (app) => {
   app.use('/users', authMiddleware, AdminRoleMiddleware, usersRouter);
   // app.use('/reviews', authMiddleware, reviewsRouter);
   app.use('/auth', authRouter);
-  // app.use('/me', authMiddleware, meRouter);
+  app.use('/me', authMiddleware, meRouter);
 };
