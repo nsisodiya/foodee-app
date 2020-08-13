@@ -1,0 +1,15 @@
+version: '3'
+services:
+  database:
+    image: mongo
+    container_name: toptal-restaurant-review
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=toptal
+    volumes:
+      - ./001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
+      - ./localmongodbdata:/data/db
