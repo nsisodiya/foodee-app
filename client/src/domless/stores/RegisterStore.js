@@ -8,6 +8,9 @@ import { actions } from './actions';
 
 const fieldMetaData = {
   name: {
+    placeholder: 'Name',
+    label: 'Name',
+    type: 'inputText',
     validator(val) {
       const error = !isLength(val, {
         min: 1
@@ -23,6 +26,10 @@ const fieldMetaData = {
     }
   },
   email: {
+    placeholder: 'email@example',
+    label: 'Email',
+    type: 'inputText',
+    subType: 'email',
     validator(val) {
       const error = !isEmail(val);
       let errorMessage = '';
@@ -36,6 +43,10 @@ const fieldMetaData = {
     }
   },
   password: {
+    placeholder: '',
+    label: 'Passowrd',
+    type: 'inputText',
+    subType: 'password',
     validator(val) {
       const error = !isLength(val, {
         min: 4
