@@ -1,6 +1,6 @@
+var path = require('path');
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
@@ -35,10 +35,14 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  if (req.app.get('env') === 'development') {
+    res.locals.error = err;
+  } else {
+    res.locals.error = {};
+  }
 
   // render the error page
   res.status(err.status || 500);

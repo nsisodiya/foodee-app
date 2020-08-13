@@ -23,7 +23,7 @@ module.exports = {
     'babel/semi': [ERROR, 'always'],
     curly: WARN,
     eqeqeq: ERROR,
-    'no-console': [ERROR, { allow: ['warn', 'error'] }],
+    //'no-console': [ERROR, { allow: ['log', 'info', 'warn', 'error'] }],
     'babel/new-cap': IGNORE,
     'no-underscore-dangle': ERROR,
     quotes: [
@@ -33,7 +33,7 @@ module.exports = {
         allowTemplateLiterals: true
       }
     ],
-    'no-magic-numbers': [ERROR, { ignore: [0, 1, 2] }],
+    'no-magic-numbers': [ERROR, { ignore: [0, 1, 2, 10, 404, 500] }],
     'import/imports-first': [ERROR, 'absolute-first'],
     'import/newline-after-import': ERROR,
     'import/no-duplicates': ERROR,
@@ -147,32 +147,6 @@ module.exports = {
     'babel/quotes': IGNORE,
     'babel/no-unused-expressions': ERROR,
     'babel/valid-typeof': ERROR,
-    'react/jsx-first-prop-new-line': ERROR,
-    'react/display-name': IGNORE, // Prevent missing displayName in a React component definition
-    //"react/jsx-quotes": [ERROR, "double", "avoid-escape"], // Enforce quote style for JSX attributes
-    //'react/jsx-no-undef': ERROR, // Disallow undeclared variables in JSX
-    'react/jsx-sort-props': IGNORE, // Enforce props alphabetical sorting
-    'react/jsx-uses-react': ERROR, // Prevent React to be incorrectly marked as unused
-    'react/jsx-uses-vars': ERROR, // Prevent variables used in JSX to be incorrectly marked as unused
-    'react/no-did-mount-set-state': ERROR, // Prevent usage of setState in componentDidMount
-    'react/no-did-update-set-state': ERROR, // Prevent usage of setState in componentDidUpdate
-    'react/no-multi-comp': IGNORE, // Prevent multiple component definition per file
-    'react/no-unknown-property': ERROR, // Prevent usage of unknown DOM property
-    'react/prop-types': [ERROR, { ignore: ['children'] }], // Prevent missing props validation in a React component definition
-    'react/react-in-jsx-scope': ERROR, // Prevent missing React when using JSX
-    'react/self-closing-comp': ERROR, // Prevent extra closing tags for components without children
-    //"react/wrap-multilines": ERROR // Prevent missing parentheses around multilines JSX,
-    'react/jsx-no-bind': [
-      ERROR,
-      {
-        ignoreDOMComponents: false,
-        ignoreRefs: false,
-        allowArrowFunctions: true,
-        allowFunctions: false,
-        allowBind: true
-      }
-    ],
-    //asdfasdfasdfafafsfa new keys,
     'prettier/prettier': ERROR,
     'react/jsx-props-no-spreading': 0,
     'no-mixed-operators': ERROR,

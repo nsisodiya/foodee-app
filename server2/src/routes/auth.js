@@ -1,10 +1,14 @@
 var express = require('express');
-var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
-var jwt = require('jsonwebtoken');
-const privateKey = 'TODO-get it from somewhere';
+var UserController = require('../models/UserController');
 
-router.post('/register', async function (req, res, next) {
+var router = express.Router();
+
+//var jwt = require('jsonwebtoken');
+
+//const privateKey = 'TODO-get it from somewhere';
+
+router.post('/register', async function (req, res) {
   const { name, email, password } = req.body;
   var role = 'REGULAR';
   try {

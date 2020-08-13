@@ -1,12 +1,13 @@
 var express = require('express');
+
 var router = express.Router();
 const UserController = require('../models/UserController.js');
 
 /*==========================
     Admin only routes.
-    
+
     Admin should be able
-    
+
     1. [x] List All User
     2. [ ] Make a normal User as Admin
     3. [ ] Delete a User
@@ -14,7 +15,7 @@ const UserController = require('../models/UserController.js');
 ============================*/
 
 /* get All Users */
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     const users = await UserController.getAllUsers();
     res.json(users);
