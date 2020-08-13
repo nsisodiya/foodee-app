@@ -33,8 +33,8 @@ exports.createRestaurant = async (data) => {
       }
     });
     console.log('Creating new Restaurant', Restaurant);
-    const restaurantInst = new Restaurant(filteredData);
-    return restaurantInst.save();
+    const inst = new Restaurant(filteredData);
+    return inst.save();
   } catch (err) {
     throw boom.boomify(err);
   }

@@ -26,8 +26,8 @@ exports.createUser = async ({ name, email, password, role }) => {
   //TODO validate
   try {
     console.log('Creating new User', User);
-    const userInst = new User({ name, email, password, role });
-    return userInst.save();
+    const inst = new User({ name, email, password, role });
+    return inst.save();
   } catch (err) {
     throw boom.boomify(err);
   }

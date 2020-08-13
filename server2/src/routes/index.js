@@ -4,6 +4,7 @@ var rootRouter = require('./root');
 var usersRouter = require('./users');
 var authRouter = require('./auth');
 var restaurantRouter = require('./RestaurantRouter');
+var reviewRouter = require('./ReviewRouter');
 
 // var reviewsRouter = require('./reviews');
 var meRouter = require('./me');
@@ -45,6 +46,7 @@ module.exports = (app) => {
   app.use('/root', rootRouter);
   app.use('/users', authMiddleware, AdminRoleMiddleware, usersRouter);
   app.use('/restaurants', authMiddleware, AdminRoleMiddleware, restaurantRouter);
+  app.use('/reviews', authMiddleware, AdminRoleMiddleware, reviewRouter);
   // app.use('/reviews', authMiddleware, reviewsRouter);
   app.use('/auth', authRouter);
   app.use('/me', authMiddleware, meRouter);
