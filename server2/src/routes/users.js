@@ -25,4 +25,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+/* get All Users */
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserController.deleteUser({ id });
+    if (user === null) {
+      return res.json({
+        user,
+        success: 'Something wrong. Probably :id dont exist'
+      });
+    }
+    res.json({
+      user,
+      success: 'User deleted'
+    });
+  } catch (err) {
+    console.log('There was an error /', JSON.stringify(err));
+    return res.send(err);
+  }
+});
+
 module.exports = router;

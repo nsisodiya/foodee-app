@@ -49,10 +49,9 @@ exports.updateUser = async (req) => {
 };
 
 // Delete a User
-exports.deleteUser = async (req) => {
+exports.deleteUser = async ({ id }) => {
   try {
-    const id = req.params.id;
-    const userInst = await User.findByIdAndRemove(id);
+    const userInst = await User.findByIdAndRemove({ _id: id });
     return userInst;
   } catch (err) {
     throw boom.boomify(err);
