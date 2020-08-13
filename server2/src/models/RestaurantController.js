@@ -23,6 +23,15 @@ exports.findRestaurantById = async (_id) => {
   }
 };
 
+// Get single Restaurant by ID
+exports.findRestaurantByIdWithReviews = async (_id) => {
+  try {
+    return await Restaurant.findOne({ _id }).populate({ path: 'reviews' });
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+};
+
 // Create a new Restaurant
 exports.createRestaurant = async (data) => {
   try {

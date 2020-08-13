@@ -6,7 +6,7 @@ var restaurantRouter = require('./RestaurantRouter');
 var reviewRouter = require('./ReviewRouter');
 
 // var reviewsRouter = require('./reviews');
-var meRouter = require('./me');
+var apiRouter = require('./api');
 const { adminRoleMiddleware, authMiddleware } = require('./middleware');
 
 module.exports = (app) => {
@@ -23,5 +23,5 @@ module.exports = (app) => {
   app.use('/reviews', authMiddleware, adminRoleMiddleware, reviewRouter);
   // app.use('/reviews', authMiddleware, reviewsRouter);
   app.use('/auth', authRouter);
-  app.use('/me', authMiddleware, meRouter);
+  app.use('/api', authMiddleware, apiRouter);
 };

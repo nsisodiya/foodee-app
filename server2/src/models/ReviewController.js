@@ -14,6 +14,15 @@ exports.getAllReviews = async () => {
   }
 };
 
+// Get all Reviews
+exports.getAllReviewsByRestaurantId = async (restaurant) => {
+  try {
+    return await Review.find({ restaurant });
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+};
+
 // Get single Review by ID
 exports.findReviewById = async (_id) => {
   try {
