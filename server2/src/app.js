@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var connectDB = require('./db/db.js');
+var connectDB = require('./connectDB.js');
 
 /**  Let first connect to dB ***/
 

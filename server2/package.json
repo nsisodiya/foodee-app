@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www | pino-colada",
+    "start": "nodemon ./src/bin/www",
+    "starts": "nodemon ./src/bin/www | pino-colada",
     "devstart": "cross-env NODE_ENV=development DEPLOY_ENV=local nodemon --inspect=0.0.0.0:9229 src/server.js | pino-colada",
     "dbstart": "sudo docker-compose -f db/docker-compose.yml up -d",
-    "dbstop": "sudo docker-compose -f db/docker-compose.yml down"
+    "dbstop": "sudo docker-compose -f db/docker-compose.yml down",
+    "lint": "eslint -c eslintrc.js ./src --ext .js",
+    "lint:fix": "eslint --fix -c eslintrc.js ./src --ext .js"
   },
   "dependencies": {
+    "boom": "7.3.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -20,6 +24,7 @@
     "jsonwebtoken": "8.5.1",
     "mongoose": "^5.9.28",
     "morgan": "~1.9.1",
-    "pino-colada": "^2.1.0"
+    "pino-colada": "^2.1.0",
+    "uuid": "8.3.0"
   }
 }

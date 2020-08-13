@@ -1,6 +1,6 @@
 var rootRouter = require('./root');
-// var usersRouter = require('./users');
-// var authRouter = require('./auth');
+var usersRouter = require('./users');
+var authRouter = require('./auth');
 // var reviewsRouter = require('./reviews');
 // var meRouter = require('./me');
 var express = require('express');
@@ -61,8 +61,8 @@ module.exports = (app) => {
     })
   );
   app.use('/root', rootRouter);
-  // app.use('/users', authMiddleware, AdminRoleMiddleware, usersRouter);
+  app.use('/users', authMiddleware, AdminRoleMiddleware, usersRouter);
   // app.use('/reviews', authMiddleware, reviewsRouter);
-  // app.use('/auth', authRouter);
+  app.use('/auth', authRouter);
   // app.use('/me', authMiddleware, meRouter);
 };
