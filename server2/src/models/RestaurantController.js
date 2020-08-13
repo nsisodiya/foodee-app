@@ -8,8 +8,7 @@ var keys = ['name', 'address', 'cuisines', 'imageurl', 'hours', 'website', 'phon
 // Get all restaurants
 exports.getAllRestaurants = async () => {
   try {
-    const restaurants = await Restaurant.find();
-    return restaurants;
+    return await Restaurant.find();
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -18,8 +17,7 @@ exports.getAllRestaurants = async () => {
 // Get single Restaurant by ID
 exports.findRestaurantById = async (_id) => {
   try {
-    const restaurantInst = await Restaurant.findOne({ _id });
-    return restaurantInst;
+    return await Restaurant.findOne({ _id });
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -51,8 +49,7 @@ exports.updateRestaurant = async (_id, data) => {
         filteredData[v] = data[v];
       }
     });
-    const update = await Restaurant.findByIdAndUpdate({ _id }, filteredData, { new: true });
-    return update;
+    return await Restaurant.findByIdAndUpdate({ _id }, filteredData, { new: true });
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -61,8 +58,7 @@ exports.updateRestaurant = async (_id, data) => {
 // Delete a Restaurant
 exports.deleteRestaurant = async (_id) => {
   try {
-    const restaurantInst = await Restaurant.findByIdAndRemove({ _id });
-    return restaurantInst;
+    return await Restaurant.findByIdAndRemove({ _id });
   } catch (err) {
     throw boom.boomify(err);
   }

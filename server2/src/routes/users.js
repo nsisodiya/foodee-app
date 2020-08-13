@@ -17,8 +17,8 @@ const UserController = require('../models/UserController.js');
 /* get All Users */
 router.get('/', async (req, res) => {
   try {
-    const users = await UserController.getAllUsers();
-    res.json(users);
+    const insts = await UserController.getAllUsers();
+    res.json(insts);
   } catch (err) {
     console.log('There was an error /', JSON.stringify(err));
     return res.send(err);
@@ -29,15 +29,15 @@ router.get('/', async (req, res) => {
 router.delete('/:_id', async (req, res) => {
   try {
     const { _id } = req.params;
-    const user = await UserController.deleteUser(_id);
-    if (user === null) {
+    const inst = await UserController.deleteUser(_id);
+    if (inst === null) {
       return res.json({
-        user,
+        inst,
         success: 'Something wrong. Probably :id dont exist'
       });
     }
     res.json({
-      user,
+      inst,
       success: 'User deleted'
     });
   } catch (err) {

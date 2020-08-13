@@ -18,8 +18,8 @@ const RestaurantController = require('../models/RestaurantController.js');
 /* get All Restaurants */
 router.get('/', async (req, res) => {
   try {
-    const restaurants = await RestaurantController.getAllRestaurants();
-    res.json(restaurants);
+    const insts = await RestaurantController.getAllRestaurants();
+    res.json(insts);
   } catch (err) {
     console.log('There was an error /', JSON.stringify(err));
     return res.send(err);
@@ -65,15 +65,15 @@ router.put('/:_id', async (req, res) => {
 router.delete('/:_id', async (req, res) => {
   try {
     const { _id } = req.params;
-    const restaurant = await RestaurantController.deleteRestaurant(_id);
-    if (restaurant === null) {
+    const inst = await RestaurantController.deleteRestaurant(_id);
+    if (inst === null) {
       return res.json({
-        restaurant,
+        inst,
         success: 'Something wrong. Probably :id dont exist'
       });
     }
     res.json({
-      restaurant,
+      inst,
       success: 'Restaurant deleted'
     });
   } catch (err) {

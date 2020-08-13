@@ -16,13 +16,13 @@ router.post('/register', async function (req, res) {
       return;
     }
     var role = 'REGULAR';
-    const dbUser = await UserController.createUser({
+    const inst = await UserController.createUser({
       name,
       role,
       email,
       password
     });
-    res.json(dbUser);
+    res.json(inst);
   } catch (err) {
     console.error('There was an error /register', err, JSON.stringify(err));
     return res.send({

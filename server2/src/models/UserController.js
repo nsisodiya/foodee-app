@@ -6,8 +6,7 @@ const User = require('./User');
 // Get all users
 exports.getAllUsers = async () => {
   try {
-    const users = await User.find();
-    return users;
+    return User.find();
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -16,8 +15,7 @@ exports.getAllUsers = async () => {
 // Get single User by email
 exports.findUserByEmail = async ({ email }) => {
   try {
-    const userInst = await User.findOne({ email });
-    return userInst;
+    return await User.findOne({ email });
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -38,8 +36,7 @@ exports.createUser = async ({ name, email, password, role }) => {
 // Delete a User
 exports.deleteUser = async (_id) => {
   try {
-    const userInst = await User.findByIdAndRemove({ _id });
-    return userInst;
+    return await User.findByIdAndRemove({ _id });
   } catch (err) {
     throw boom.boomify(err);
   }
