@@ -5,8 +5,9 @@ import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { getHeaders } from '../utils/getHeaders';
 import { HttpCodes } from '../utils/HttpCodes';
 import { actions } from './actions';
+import { formUtil } from './formUtil';
 
-const fieldMetaData = {
+export const fieldMetaData = {
   name: {
     validator(val) {
       const error = !isLength(val, {
@@ -52,19 +53,6 @@ const fieldMetaData = {
   }
 };
 
-const calculateIsFormValid = (state) => {
-  var r = true;
-  Object.keys(fieldMetaData).forEach((v) => {
-    r = r && fieldMetaData[v].validator(state.fields[v].val).error === false;
-  });
-  return r;
-};
-
-const validate = (state, field, val) => {
-  const { error, errorMessage } = fieldMetaData[field].validator(val);
-  state.fields[field].error = error;
-  state.fields[field].errorMessage = errorMessage;
-};
 export const RegisterStore = createReducer({
   namespace: 'RegisterStore',
   initialState: {
@@ -114,11 +102,11 @@ export const RegisterStore = createReducer({
   editFormField(state, field, val) {
     var obj = state.fields[field];
     obj.val = val;
-    validate(state, field, val);
-    state.isFormValid = calculateIsFormValid(state);
+    formUtil.validate(state, field, val);
+    state.isFormValid = formUtil.calculateIsFormValid(state);
   },
   createAccount(state) {
-    state.isFormValid = calculateIsFormValid(state);
+    state.isFormValid = formUtil.calculateIsFormValid(state);
     if (state.isFormValid === false) {
       return;
     }
