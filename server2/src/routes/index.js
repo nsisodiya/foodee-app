@@ -1,5 +1,4 @@
 var express = require('express');
-var jwt = require('jsonwebtoken');
 var rootRouter = require('./root');
 var usersRouter = require('./users');
 var authRouter = require('./auth');
@@ -8,32 +7,7 @@ var reviewRouter = require('./ReviewRouter');
 
 // var reviewsRouter = require('./reviews');
 var meRouter = require('./me');
-const { AdminRoleMiddleware } = require('./AdminRoleMiddleware');
-
-const privateKey = 'TODO-get it from somewhere';
-
-const authMiddleware = async (req, res, next) => {
-  try {
-    if (req.headers.authorization === undefined) {
-      return res.json({
-        error: true,
-        message: 'Authorization headers are not provided'
-      });
-    }
-    var token = req.headers.authorization.split(' ')[1];
-    var decoded = await jwt.verify(token, privateKey);
-    req.loggedUser = decoded;
-    next();
-  } catch (err) {
-    console.log('There was an error /me', err, JSON.stringify(err));
-    return res.json({
-      error: true,
-      fullError: err,
-      name: err.name,
-      json: JSON.stringify(err)
-    });
-  }
-};
+const { adminRoleMiddleware, authMiddleware } = require('./middleware');
 
 module.exports = (app) => {
   console.log('Setting up Routes');
@@ -44,9 +18,9 @@ module.exports = (app) => {
     })
   );
   app.use('/root', rootRouter);
-  app.use('/users', authMiddleware, AdminRoleMiddleware, usersRouter);
-  app.use('/restaurants', authMiddleware, AdminRoleMiddleware, restaurantRouter);
-  app.use('/reviews', authMiddleware, AdminRoleMiddleware, reviewRouter);
+  app.use('/users', authMiddleware, adminRoleMiddleware, usersRouter);
+  app.use('/restaurants', authMiddleware, adminRoleMiddleware, restaurantRouter);
+  app.use('/reviews', authMiddleware, adminRoleMiddleware, reviewRouter);
   // app.use('/reviews', authMiddleware, reviewsRouter);
   app.use('/auth', authRouter);
   app.use('/me', authMiddleware, meRouter);
