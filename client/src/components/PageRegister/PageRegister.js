@@ -4,8 +4,8 @@ import css from 'css-template';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
+import { generateFormItem } from '../forms/generateFormItem';
 import { Container } from './PageRegister.styled';
-import { generateFormItem } from './generateFormItem';
 // Open - http://localhost:1234/components/page-register
 // Open - http://localhost:6006/?path=/story/components-pageregister--normal
 
