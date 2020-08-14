@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarFilled from '@ant-design/icons/es/icons/StarFilled';
 import { DevLinks } from '../DevLinks/DevLinks';
-import { iff } from '../../utils/iff';
 import { Rows, Columns, Hr } from '../../css/Layout';
 
 const { Container, Title, FieldVal, Field } = {
@@ -78,6 +77,33 @@ const styles = {
 // Open - http://localhost:6006/?path=/story/components-restaurantwidget--normal
 
 const filePath = `/src/components/RestaurantWidget/RestaurantWidget.js`;
+const If = ({ check, children }) => {
+  if (check) {
+    return children[0];
+  }
+  return children[1];
+};
+
+export const RatingCard = ({ avgRating, reviews }) => {
+  return (
+    <Columns centered>
+      <StarFilled />
+      <If check={typeof avgRating === 'number'}>
+        <>
+          <AvgRating>{avgRating}</AvgRating>
+          <ReviewsCount>({reviews})</ReviewsCount>
+        </>
+        <>
+          <ReviewsCount>No rating</ReviewsCount>
+        </>
+      </If>
+    </Columns>
+  );
+};
+RatingCard.propTypes = {
+  avgRating: PropTypes.number,
+  reviews: PropTypes.number
+};
 
 export const RestaurantWidget = function ({
   name,
@@ -102,17 +128,7 @@ export const RestaurantWidget = function ({
               margin-left: 10px;
             `}>
             <Title>{name}</Title>
-            <Columns centered>
-              <StarFilled />
-              {iff(
-                typeof avgRating === 'number',
-                <>
-                  <AvgRating>{avgRating}</AvgRating>
-                  <ReviewsCount>({reviews})</ReviewsCount>
-                </>,
-                <ReviewsCount>No rating</ReviewsCount>
-              )}
-            </Columns>
+            <RatingCard {...{ avgRating, reviews }} />
             <Address>{address}</Address>
           </div>
         </Columns>
