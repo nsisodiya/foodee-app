@@ -24,3 +24,11 @@ module.exports = () => {
     });
   });
 };
+
+process.on('SIGINT', function () {
+  console.log('Bye bye');
+  mongoose.connection.close(function () {
+    console.log('Mongoose disconnected through app termination');
+    process.exit(0);
+  });
+});
