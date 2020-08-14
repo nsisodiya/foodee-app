@@ -9,9 +9,11 @@ import { PageLogin } from './PageLogin/PageLogin';
 import { Header } from './Header/Header';
 import { RestaurantWidget } from './RestaurantWidget/RestaurantWidget';
 import { ReviewBox } from './ReviewBox/ReviewBox';
+import { AddReviewBox } from './AddReviewBox/AddReviewBox';
 
 export {
   AllStores,
+  AddReviewBox,
   ReviewBox,
   RestaurantWidget,
   PageRegister,

@@ -6,6 +6,7 @@ import {
   Header,
   PageRegister,
   ReviewBox,
+  AddReviewBox,
   Rating,
   SimpleComponentViewer,
   PageLogin,
@@ -25,6 +26,7 @@ function NoMatch() {
 const allComponents = [
   AllStores,
   ReviewBox,
+  AddReviewBox,
   RestaurantWidget,
   Header,
   PageRegister,

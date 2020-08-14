@@ -33,6 +33,7 @@ async function main() {
   var compFileContent = `import React from 'react';
 import css from 'css-template';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Container } from './${componentName}.styled';
 import { DisabledText } from '../../css/common.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
