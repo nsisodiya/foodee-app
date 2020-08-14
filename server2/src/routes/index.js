@@ -9,6 +9,14 @@ var reviewRouter = require('./ReviewRouter');
 var apiRouter = require('./api');
 const { adminRoleMiddleware, authMiddleware } = require('./middleware');
 
+// function(req, res, next){
+//   if (req.query.something) {
+//     middlewareA(req, res, next);
+//   } else {
+//     middlewareB(req, res, next);
+//   }
+// }
+
 module.exports = (app) => {
   console.log('Setting up Routes');
   app.use(
@@ -21,7 +29,6 @@ module.exports = (app) => {
   app.use('/users', authMiddleware, adminRoleMiddleware, usersRouter);
   app.use('/restaurants', authMiddleware, adminRoleMiddleware, restaurantRouter);
   app.use('/reviews', authMiddleware, adminRoleMiddleware, reviewRouter);
-  // app.use('/reviews', authMiddleware, reviewsRouter);
   app.use('/auth', authRouter);
   app.use('/api', authMiddleware, apiRouter);
 };
