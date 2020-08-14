@@ -47,8 +47,7 @@ export const LoginStore = createReducer({
         placeholder: 'email@example',
         label: 'Email',
         required: true,
-        type: 'inputText',
-        subType: 'email',
+        type: 'text',
         val: '',
         error: false,
         errorMessage: ''
@@ -57,8 +56,7 @@ export const LoginStore = createReducer({
         placeholder: '',
         required: true,
         label: 'Passowrd',
-        type: 'inputText',
-        subType: 'password',
+        type: 'password',
         val: '',
         error: false,
         errorMessage: ''

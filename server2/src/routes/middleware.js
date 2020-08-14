@@ -5,7 +5,7 @@ const adminRoleMiddleware = async (req, res, next) => {
     } else {
       return res.json({
         error: true,
-        message: 'Auth Error: Role is not sufficient'
+        errorMessage: 'Auth Error: Role is not sufficient'
       });
     }
   } catch (err) {
@@ -13,7 +13,7 @@ const adminRoleMiddleware = async (req, res, next) => {
     return res.json({
       error: true,
       fullError: err,
-      name: err.name,
+      errorMessage: err.name,
       json: JSON.stringify(err)
     });
   }
@@ -29,7 +29,7 @@ const authMiddleware = async (req, res, next) => {
     if (req.headers.authorization === undefined) {
       return res.json({
         error: true,
-        message: 'Authorization headers are not provided'
+        errorMessage: 'Authorization headers are not provided'
       });
     }
     var token = req.headers.authorization.split(' ')[1];
@@ -41,7 +41,7 @@ const authMiddleware = async (req, res, next) => {
     return res.json({
       error: true,
       fullError: err,
-      name: err.name,
+      errorMessage: err.name,
       json: JSON.stringify(err)
     });
   }

@@ -19,11 +19,13 @@ var ReviewSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   restaurant: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Restaurant'
+    ref: 'Restaurant',
+    required: true
   }
 });
 var Review = mongoose.model('Review', ReviewSchema);

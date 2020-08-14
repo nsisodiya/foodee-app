@@ -1,5 +1,4 @@
 import { createReducer } from 'redux-wow';
-import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
 import { message } from 'antd';
 import { XHR_STATUS } from '../../constants/XHR_STATUS';
@@ -8,15 +7,14 @@ import { HttpCodes } from '../utils/HttpCodes';
 import { actions } from './actions';
 import { formUtil } from './formUtil';
 
-export const fieldMetaData = {
-  name: {
+const fieldMetaData = {
+  rating: {
     validator(val) {
-      const error = !isLength(val, {
-        min: 1
-      });
+      const max = 5;
+      const error = !(val >= 1 && val <= max);
       let errorMessage = '';
       if (error) {
-        errorMessage = 'Name should not be empty';
+        errorMessage = 'Rating is not valid';
       }
       return {
         error,
@@ -24,27 +22,14 @@ export const fieldMetaData = {
       };
     }
   },
-  email: {
-    validator(val) {
-      const error = !isEmail(val);
-      let errorMessage = '';
-      if (error) {
-        errorMessage = 'Email is not valid';
-      }
-      return {
-        error,
-        errorMessage
-      };
-    }
-  },
-  password: {
+  comment: {
     validator(val) {
       const error = !isLength(val, {
         min: 4
       });
       let errorMessage = '';
       if (error) {
-        errorMessage = 'Password should be atleast 4 char';
+        errorMessage = 'Please add atleast 4 letters';
       }
       return {
         error,
@@ -54,40 +39,36 @@ export const fieldMetaData = {
   }
 };
 
-export const RegisterStore = createReducer({
-  namespace: 'RegisterStore',
+export const AddReviewStore = createReducer({
+  namespace: 'AddReviewStore',
   initialState: {
     fields: {
-      name: {
-        placeholder: 'Name',
-        label: 'Name',
+      restaurant: {
         required: true,
         type: 'text',
         val: '',
         error: false,
         errorMessage: ''
       },
-      email: {
-        placeholder: 'email@example',
-        label: 'Email',
+      rating: {
         required: true,
-        type: 'text',
-        val: '',
+        type: 'rating',
+        val: 0,
         error: false,
         errorMessage: ''
       },
-      password: {
-        placeholder: '',
+      comment: {
+        placeholder: 'Please write your review...',
         required: true,
-        label: 'Passowrd',
-        type: 'password',
+        label: '',
+        type: 'textarea',
         val: '',
         error: false,
         errorMessage: ''
       }
     },
-    submitBtnText: 'Create Account',
-    apiUrl: '/auth/register',
+    submitBtnText: 'Submit',
+    apiUrl: '/reviews',
     isFormValid: true,
     xhr: {
       create: {
@@ -105,8 +86,8 @@ export const RegisterStore = createReducer({
     formUtil.validate(state, field, val, fieldMetaData);
     state.isFormValid = formUtil.calculateIsFormValid(state, fieldMetaData);
   },
-  createAccount(state) {
-    state.isFormValid = formUtil.calculateIsFormValid(state, fieldMetaData);
+  addReview(state) {
+    formUtil.validateAll(state, fieldMetaData);
     if (state.isFormValid === false) {
       return;
     }
@@ -116,16 +97,16 @@ export const RegisterStore = createReducer({
         const resraw = await fetch(`${process.env.API_URL}${state.apiUrl}`, {
           method: 'POST',
           body: JSON.stringify({
-            name: state.fields.name.val,
-            email: state.fields.email.val,
-            password: state.fields.password.val
+            rating: state.fields.rating.val,
+            restaurant: state.fields.restaurant.val,
+            comment: state.fields.comment.val
           }),
           headers: getHeaders()
         });
         const { status: statusCode, statusText } = resraw;
         // Status is less than 200 and greater than equal to 300.
         if (statusCode < HttpCodes.OK200 || statusCode >= HttpCodes.MULTIPLE_CHOICES) {
-          actions.RegisterStore.createAccountFailure({
+          actions.AddReviewStore.addReviewFailure({
             statusCode,
             statusText,
             errorMessage: 'Something wrong with server API'
@@ -134,42 +115,52 @@ export const RegisterStore = createReducer({
         }
         const res = await resraw.json();
         if (res.error === true) {
-          actions.RegisterStore.createAccountFailure({
+          actions.AddReviewStore.addReviewFailure({
             statusCode,
             statusText,
             errorMessage: res.errorMessage
           });
         } else {
-          actions.RegisterStore.createAccountSuccess(res);
+          actions.AddReviewStore.addReviewSuccess(res);
         }
       } catch (error) {
-        console.error('Catch Error: RegisterStore -> createAccount', error);
-        actions.RegisterStore.createAccountFailure({
+        console.error('Catch Error: AddReviewStore -> addReview', error);
+        actions.AddReviewStore.addReviewFailure({
           errorMessage: error
         });
       }
     })();
   },
-  createAccountSuccess(state /*, res*/) {
-    state.xhr.create.status = XHR_STATUS.XHR_IN_SUCCESS;
-    state.xhr.create.successMessage = 'Your account successfully created';
-    message.success(state.xhr.create.successMessage);
-    const timeout = 1000;
-    window.setTimeout(() => {
-      window.location = '/login';
-    }, timeout);
-    //TODO - save Token from server and redirect to "/"
-    //TODO - show UI message that - res.successMessage
-    //TODO - Redirect to /Login
+  clear(state) {
+    state.fields.rating.val = 0;
+    state.fields.rating.error = false;
+    state.fields.rating.errorMessage = '';
+    state.fields.comment.val = '';
+    state.fields.comment.error = false;
+    state.fields.comment.errorMessage = '';
   },
-  createAccountFailure(state, { statusCode, statusText, errorMessage }) {
+  addReviewSuccess(state) {
+    state.xhr.create.status = XHR_STATUS.XHR_IN_SUCCESS;
+    state.xhr.create.successMessage = 'Thanks, your review Added';
+    message.success(state.xhr.create.successMessage);
+    setTimeout(function () {
+      actions.AddReviewStore.clear();
+    }, 0);
+    //Clear Form. TODO
+  },
+  addReviewFailure(state, { statusCode, statusText, errorMessage }) {
     state.xhr.create.status = XHR_STATUS.XHR_IN_ERROR;
     state.xhr.create.statusCode = statusCode;
     state.xhr.create.statusText = statusText;
     state.xhr.create.errorMessage = errorMessage;
-    message.error(state.xhr.create.errorMessage);
+    if (typeof errorMessage === 'string') {
+      message.error(state.xhr.create.errorMessage);
+    } else {
+      message.error(state.xhr.create.errorMessage.message);
+    }
+
     console.error(
-      `XHR failed - RegisterStore:CreateAccount. StatusCode-${statusCode}, StatusText- ${statusText}`
+      `XHR failed - AddReviewStore:addReview. StatusCode-${statusCode}, StatusText- ${statusText}`
     );
   }
 });

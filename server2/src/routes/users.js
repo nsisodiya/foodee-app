@@ -21,7 +21,10 @@ router.get('/', async (req, res) => {
     res.json(insts);
   } catch (err) {
     console.log('There was an error /', JSON.stringify(err));
-    return res.send(err);
+    return res.send({
+      error: true,
+      errorMessage: err
+    });
   }
 });
 
@@ -42,7 +45,10 @@ router.delete('/:_id', async (req, res) => {
     });
   } catch (err) {
     console.log('There was an error /', JSON.stringify(err));
-    return res.send(err);
+    return res.send({
+      error: true,
+      errorMessage: err
+    });
   }
 });
 
