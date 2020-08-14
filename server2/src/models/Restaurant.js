@@ -13,8 +13,7 @@ var RestaurantSchema = new mongoose.Schema({
   },
   cuisines: {
     type: String,
-    trim: true,
-    required: true
+    trim: true
   },
   imageurl: {
     type: String,

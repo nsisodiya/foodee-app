@@ -7,9 +7,11 @@ import { Rating } from './Rating/Rating';
 import { PageRegister } from './PageRegister/PageRegister';
 import { PageLogin } from './PageLogin/PageLogin';
 import { Header } from './Header/Header';
+import { RestaurantWidget } from './RestaurantWidget/RestaurantWidget';
 
 export {
   AllStores,
+  RestaurantWidget,
   PageRegister,
   Header,
   PageLogin,

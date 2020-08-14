@@ -7,7 +7,8 @@ import {
   PageRegister,
   Rating,
   SimpleComponentViewer,
-  PageLogin
+  PageLogin,
+  RestaurantWidget
 } from '../components';
 
 import { ConstantsViewer } from '../devtools/ConstantsViewer';
@@ -20,7 +21,7 @@ function NoMatch() {
     </div>
   );
 }
-const allComponents = [AllStores, Header, PageRegister, PageLogin, Rating];
+const allComponents = [AllStores, RestaurantWidget, Header, PageRegister, PageLogin, Rating];
 
 function generateRoutes(compArray) {
   return compArray.map((v) => {
