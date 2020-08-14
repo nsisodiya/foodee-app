@@ -29,7 +29,7 @@ const styles = {
   `,
   nav: css`
      {
-      background: yellow;
+      background: white;
     }
   `,
   links: css`
