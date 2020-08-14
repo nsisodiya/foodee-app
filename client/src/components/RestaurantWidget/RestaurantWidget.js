@@ -1,65 +1,45 @@
 import React from 'react';
 import css from 'css-template';
 import PropTypes from 'prop-types';
-import styled, { css as tx } from 'styled-components';
+import styled from 'styled-components';
 import StarFilled from '@ant-design/icons/es/icons/StarFilled';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { iff } from '../../utils/iff';
+import { Rows, Columns, Hr } from '../../css/Layout';
 
-const Columns = styled.div`
-  display: flex;
-  flex-direction: row;
-  ${(props) =>
-    props.centered &&
-    tx`
-      align-items: center;
-    `}
-`;
-
-const Rows = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Hr = styled.hr`
-  border-top: 1px solid lightgray;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-const Container = styled.div`
-  position: relative;
-  width: 558px;
-  background: white;
-  padding: 14px;
-  border-radius: 5px;
-`;
-
-const Title = styled.span`
-  font-weight: 700;
-  margin-top: 10px;
-  line-height: 22px;
-  font-size: 24px;
-  color: #cb202d;
-`;
-const FieldVal = styled.span`
-  font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #33373d;
-  max-width: 300px;
-  display: inline-block;
-`;
-
-const Field = styled.span`
-  font-size: 12px;
-  color: #89959b;
-  width: 115px;
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-`;
+const { Container, Title, FieldVal, Field } = {
+  Container: styled.div`
+    position: relative;
+    width: 558px;
+    background: white;
+    padding: 14px;
+    border-radius: 5px;
+  `,
+  Title: styled.span`
+    font-weight: 700;
+    margin-top: 10px;
+    line-height: 22px;
+    font-size: 24px;
+    color: #cb202d;
+  `,
+  FieldVal: styled.span`
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #33373d;
+    max-width: 300px;
+    display: inline-block;
+  `,
+  Field: styled.span`
+    font-size: 12px;
+    color: #89959b;
+    width: 115px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  `
+};
 
 const Address = styled.span`
   max-width: 370px;
