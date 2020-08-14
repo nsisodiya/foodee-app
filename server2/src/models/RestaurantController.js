@@ -2,6 +2,7 @@
 const boom = require('boom');
 // Get Data Models
 const Restaurant = require('./Restaurant');
+const ReviewController = require('./ReviewController');
 
 var keys = ['name', 'address', 'cuisines', 'imageurl', 'hours', 'website', 'phone'];
 
@@ -26,7 +27,10 @@ exports.findRestaurantById = async (_id) => {
 // Get single Restaurant by ID
 exports.findRestaurantByIdWithReviews = async (_id) => {
   try {
-    return await Restaurant.findOne({ _id }).populate({ path: 'reviews' });
+    const reviews = await ReviewController.getAllReviewsByRestaurantId(_id);
+    const restaurant = await Restaurant.findOne({ _id });
+    restaurant.reviews = reviews;
+    return restaurant;
   } catch (err) {
     throw boom.boomify(err);
   }
