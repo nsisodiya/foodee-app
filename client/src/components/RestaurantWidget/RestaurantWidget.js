@@ -27,21 +27,61 @@ const Hr = styled.hr`
   margin-bottom: 10px;
 `;
 
+const Container = styled.div`
+  position: relative;
+  width: 558px;
+  background: white;
+  padding: 14px;
+  border-radius: 5px;
+`;
+
+const Title = styled.span`
+  font-weight: 700;
+  margin-top: 10px;
+  line-height: 22px;
+  font-size: 24px;
+  color: #cb202d;
+`;
+const FieldVal = styled.span`
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #33373d;
+  max-width: 300px;
+  display: inline-block;
+`;
+
+const Field = styled.span`
+  font-size: 12px;
+  color: #89959b;
+  width: 115px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+`;
+
+const Address = styled.span`
+  max-width: 370px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #89959b;
+`;
+const ReviewsCount = styled.span`
+  font-size: 13px;
+  font-weight: 400;
+  color: #696969;
+  margin-left: 2px;
+`;
+const AvgRating = styled.span`
+  font-size: 13px;
+  font-weight: 500;
+  color: #1c1c1c;
+  margin-left: 2px;
+`;
 const styles = {
-  container: css`
-    position: relative;
-    width: 558px;
-    background: white;
-    padding: 14px;
-    border-radius: 5px;
-  `,
-  title: css`
-    font-weight: 700;
-    margin-top: 10px;
-    line-height: 22px;
-    font-size: 24px;
-    color: #cb202d;
-  `,
   imagebox: css`
     width: 105px;
     height: 105px;
@@ -52,46 +92,8 @@ const styles = {
   img: css`
     max-width: max-content;
     height: 100%;
-  `,
-  ratingvalue: css`
-    font-size: 13px;
-    font-weight: 500;
-    color: #1c1c1c;
-    margin-left: 2px;
-  `,
-  ratingcount: css`
-    font-size: 13px;
-    font-weight: 400;
-    color: #696969;
-    margin-left: 2px;
-  `,
-  address: css`
-    max-width: 370px;
-    font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #89959b;
-  `,
-  field: css`
-    font-size: 12px;
-    color: #89959b;
-    width: 115px;
-    display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-  `,
-  fieldval: css`
-    font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #33373d;
-    max-width: 300px;
-    display: inline-block;
   `
 };
-
 // Open - http://localhost:1234/components/restaurant-widget
 // Open - http://localhost:6006/?path=/story/components-restaurantwidget--normal
 
@@ -109,7 +111,7 @@ export const RestaurantWidget = function ({
   phone
 }) {
   return (
-    <div data-file={filePath} style={styles.container}>
+    <Container data-file={filePath}>
       <Rows>
         <Columns>
           <div style={styles.imagebox}>
@@ -119,44 +121,44 @@ export const RestaurantWidget = function ({
             style={css`
               margin-left: 10px;
             `}>
-            <div style={styles.title}>{name}</div>
+            <Title>{name}</Title>
             <Columns centered>
               <StarFilled />
               {iff(
                 typeof avgRating === 'number',
                 <>
-                  <span style={styles.ratingvalue}>{avgRating}</span>
-                  <span style={styles.ratingcount}>({reviews})</span>
+                  <AvgRating>{avgRating}</AvgRating>
+                  <ReviewsCount>({reviews})</ReviewsCount>
                 </>,
-                <span style={styles.ratingcount}>No rating</span>
+                <ReviewsCount>No rating</ReviewsCount>
               )}
             </Columns>
-            <div style={styles.address}>{address}</div>
+            <Address>{address}</Address>
           </div>
         </Columns>
         <Hr />
         <Rows>
           <Columns centered>
-            <span style={styles.field}>CUISINS</span>
-            <span style={styles.fieldval}>{cuisines}</span>
+            <Field>CUISINS</Field>
+            <FieldVal>{cuisines}</FieldVal>
           </Columns>
           <Columns centered>
-            <span style={styles.field}>HOURS</span>
-            <span style={styles.fieldval}>{hours}</span>
+            <Field>HOURS</Field>
+            <FieldVal>{hours}</FieldVal>
           </Columns>
           <Columns centered>
-            <span style={styles.field}>Website</span>
-            <span style={styles.fieldval}>{website}</span>
+            <Field>Website</Field>
+            <FieldVal>{website}</FieldVal>
           </Columns>
           <Columns centered>
-            <span style={styles.field}>CALL</span>
-            <span style={styles.fieldval}>{phone}</span>
+            <Field>CALL</Field>
+            <FieldVal>{phone}</FieldVal>
           </Columns>
         </Rows>
       </Rows>
 
       <DevLinks displayName={RestaurantWidget.displayName} filePath={filePath} />
-    </div>
+    </Container>
   );
 };
 
