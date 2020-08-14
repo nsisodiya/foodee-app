@@ -1,4 +1,5 @@
 import styled, { css as tx } from 'styled-components';
+import React from 'react';
 
 export const Columns = styled.div`
   display: flex;
@@ -18,3 +19,10 @@ export const Hr = styled.hr`
   margin-top: 10px;
   margin-bottom: 10px;
 `;
+
+export const ColSpacer = ({ children }) => {
+  return <div style={{ width: `${children}px` }} />;
+};
+export const RowSpacer = ({ children }) => {
+  return <div style={{ height: `${children}px` }} />;
+};

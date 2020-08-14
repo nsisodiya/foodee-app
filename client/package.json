@@ -69,6 +69,7 @@
     "redux-wow": "1.0.0",
     "styled-components": "5.1.1",
     "tailwindcss": "1.6.2",
+    "time-ago": "0.2.1",
     "typeface-rubik": "0.0.72",
     "validator": "13.1.1"
   }

@@ -5,6 +5,7 @@ import {
   AllStores,
   Header,
   PageRegister,
+  ReviewBox,
   Rating,
   SimpleComponentViewer,
   PageLogin,
@@ -21,7 +22,15 @@ function NoMatch() {
     </div>
   );
 }
-const allComponents = [AllStores, RestaurantWidget, Header, PageRegister, PageLogin, Rating];
+const allComponents = [
+  AllStores,
+  ReviewBox,
+  RestaurantWidget,
+  Header,
+  PageRegister,
+  PageLogin,
+  Rating
+];
 
 function generateRoutes(compArray) {
   return compArray.map((v) => {
