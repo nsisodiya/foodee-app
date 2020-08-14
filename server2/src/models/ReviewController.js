@@ -13,6 +13,17 @@ exports.getAllReviews = async () => {
     throw boom.boomify(err);
   }
 };
+// getAll AvgRatings and total Reviews;
+exports.getAvgReviews = async () => {
+  //  db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRatings : {$avg : '$rating'}}}])
+  try {
+    return await Review.aggregate([
+      { $group: { _id: '$restaurant', totalReviews: { $sum: 1 }, avgRatings: { $avg: '$rating' } } }
+    ]);
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+};
 
 // Get all Reviews
 exports.getAllReviewsByRestaurantId = async (restaurant) => {

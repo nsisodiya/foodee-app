@@ -45,6 +45,22 @@ router.get('/getAllReviewsByRestaurantId/:_id', async function (req, res) {
     });
   }
 });
+router.get('/getReviewsAllRestaurant', async function (req, res) {
+  try {
+    const inst = await ReviewController.getAvgReviews();
+    return res.json(inst);
+    //db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRatings : {$avg : '$rating'}}}])
+    // const { _id } = req.params;
+    // const inst = await /5f358588adc204837bf05f96/5f358588adc204837bf05f96wController.getAllReviewsByRestaurantId(_id);
+    return res.json({ working: 'working' });
+  } catch (err) {
+    console.log('There was an error /me', err, JSON.stringify(err));
+    return res.json({
+      error: true,
+      errorMessage: err
+    });
+  }
+});
 //getAllReviewsByRestaurantId
 
 module.exports = router;
