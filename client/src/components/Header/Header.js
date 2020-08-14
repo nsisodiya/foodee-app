@@ -1,36 +1,63 @@
 import React from 'react';
 import css from 'css-template';
-import PropTypes from 'prop-types';
-import { DisabledText } from '../../css/common.styled';
+import { Link } from 'react-router-dom';
 import { DevLinks } from '../DevLinks/DevLinks';
-import { Container } from './Header.styled';
-
-const mtop30 = css`
-  margin-top: 30px;
-  margin-left: 30px;
-`;
-
+import logo from '../../img/foodeeLogo.png';
 // Open - http://localhost:1234/components/header
 // Open - http://localhost:6006/?path=/story/components-header--normal
 
 const filePath = `/src/components/Header/Header.js`;
+const styles = {
+  container: css`
+     {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      background: white;
+      display: flex;
+      flex-direction: row;
+      padding-left: 100px;
+      padding-right: 100px;
+      align-items: center;
+      justify-content: space-between;
+    }
+  `,
+  logo: css`
+     {
+      width: 138px;
+    }
+  `,
+  nav: css`
+     {
+      background: yellow;
+    }
+  `,
+  links: css`
+     {
+      margin-right: 10px;
+    }
+  `
+};
 
-export const Header = function ({ id }) {
+export const Header = function () {
   return (
-    <Container data-file={filePath} style={mtop30} className='p-3 border bg-gray-100 rounded-lg'>
-      <div className='p-1 color-green-600'>Header {id}</div>
-      <DisabledText>This text is Disabled</DisabledText>
+    <div style={styles.container} data-file={filePath}>
+      <span>
+        <img style={styles.logo} src={logo} />
+      </span>
+      <nav style={styles.nav}>
+        <Link style={styles.links} to='/login'>
+          Login
+        </Link>
+        <Link style={styles.links} to='/register'>
+          Register
+        </Link>
+      </nav>
       <DevLinks displayName={Header.displayName} filePath={filePath} />
-    </Container>
+    </div>
   );
 };
 
 Header.displayName = 'Header';
-Header.testProps = [
-  {
-    id: 'xyz'
-  }
-];
-Header.propTypes = {
-  id: PropTypes.string
-};
+Header.testProps = [];
+Header.propTypes = {};

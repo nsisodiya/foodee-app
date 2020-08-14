@@ -1,7 +1,14 @@
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import React from 'react';
 import { paramCase } from 'change-case';
-import { AllStores, PageRegister, Rating, SimpleComponentViewer, PageLogin } from '../components';
+import {
+  AllStores,
+  Header,
+  PageRegister,
+  Rating,
+  SimpleComponentViewer,
+  PageLogin
+} from '../components';
 
 import { ConstantsViewer } from '../devtools/ConstantsViewer';
 import { UserRoleType } from '../constants/UserRoleType';
@@ -13,7 +20,7 @@ function NoMatch() {
     </div>
   );
 }
-const allComponents = [AllStores, PageRegister, PageLogin, Rating];
+const allComponents = [AllStores, Header, PageRegister, PageLogin, Rating];
 
 function generateRoutes(compArray) {
   return compArray.map((v) => {
@@ -36,25 +43,29 @@ function loadAllComponents(compArray) {
 }
 export const AppRouter = function () {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          {loadAllComponents(allComponents)}
-        </Route>
-        <Route path='/register/'>
-          <PageRegister />
-        </Route>
-        <Route path='/login/'>
-          <PageLogin />
-        </Route>
-        <Route path='/constants/userroletype'>
-          <ConstantsViewer data={UserRoleType} name='UserRoleType' />
-        </Route>
-        {generateRoutes(allComponents)}
-        <Route path='*'>
-          <NoMatch />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path='/'>
+            <h1>Welcome</h1>
+          </Route>
+          <Route path='/all'>{loadAllComponents(allComponents)}</Route>
+          <Route path='/register/'>
+            <PageRegister />
+          </Route>
+          <Route path='/login/'>
+            <PageLogin />
+          </Route>
+          <Route path='/constants/userroletype'>
+            <ConstantsViewer data={UserRoleType} name='UserRoleType' />
+          </Route>
+          {generateRoutes(allComponents)}
+          <Route path='*'>
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 };

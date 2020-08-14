@@ -6,10 +6,12 @@ import { StoreConnector } from './StoreConnector/StoreConnector';
 import { Rating } from './Rating/Rating';
 import { PageRegister } from './PageRegister/PageRegister';
 import { PageLogin } from './PageLogin/PageLogin';
+import { Header } from './Header/Header';
 
 export {
   AllStores,
   PageRegister,
+  Header,
   PageLogin,
   Rating,
   DevLinks,
