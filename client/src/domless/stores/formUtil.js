@@ -29,5 +29,12 @@ export const formUtil = {
       r = r && state.fields[field].error === false;
     });
     state.isFormValid = r;
+  },
+  getCurrentFormValue(state) {
+    var r = {};
+    Object.keys(state.fields).forEach((field) => {
+      r[field] = state.fields[field].val;
+    });
+    return r;
   }
 };

@@ -28,6 +28,9 @@ var ReviewSchema = new mongoose.Schema({
     required: true
   }
 });
+ReviewSchema.set('toJSON', {
+  virtuals: true
+});
 var Review = mongoose.model('Review', ReviewSchema);
 console.log('Create Review Schema');
 module.exports = Review;

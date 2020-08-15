@@ -25,7 +25,7 @@ module.exports = {
     eqeqeq: ERROR,
     //'no-console': [ERROR, { allow: ['log', 'info', 'warn', 'error'] }],
     'babel/new-cap': IGNORE,
-    'no-underscore-dangle': ERROR,
+    'no-underscore-dangle': WARN,
     quotes: [
       ERROR,
       'single',

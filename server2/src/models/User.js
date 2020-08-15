@@ -36,6 +36,9 @@ var UserSchema = new mongoose.Schema({
 //   next();
 // });
 
+UserSchema.set('toJSON', {
+  virtuals: true
+});
 var User = mongoose.model('User', UserSchema);
 console.log('Create User Schema');
 module.exports = User;

@@ -33,6 +33,9 @@ var RestaurantSchema = new mongoose.Schema({
   },
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 });
+RestaurantSchema.set('toJSON', {
+  virtuals: true
+});
 var Restaurant = mongoose.model('Restaurant', RestaurantSchema);
 console.log('Create Restaurant Schema');
 module.exports = Restaurant;
