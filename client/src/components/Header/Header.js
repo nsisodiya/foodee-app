@@ -8,6 +8,7 @@ import logo from '../../img/foodeeLogo.png';
 import { Columns, If, ColSpacer } from '../../css/Layout';
 // Open - http://localhost:1234/components/header
 // Open - http://localhost:6006/?path=/story/components-header--normal
+import { iff } from '../../utils/iff';
 
 const UserName = styled.div``;
 
@@ -67,16 +68,16 @@ function parseJwt(token) {
 }
 
 export const Header = function () {
-  var userlabel;
+  var userinfo = {
+    loggedIn: false
+  };
   try {
     const token = localStorage.getItem('token');
     if (token !== null) {
       const tokendata = parseJwt(token);
-      if (tokendata.role === 'ADMIN') {
-        userlabel = `${tokendata.name} (${tokendata.role})`;
-      } else {
-        userlabel = `${tokendata.name}`;
-      }
+      userinfo.role = tokendata.role;
+      userinfo.name = tokendata.name;
+      userinfo.loggedIn = true;
     }
   } catch (error) {
     console.error(error);
@@ -90,11 +91,14 @@ export const Header = function () {
       </Link>
       <Columns centered>
         <nav style={styles.nav}>
-          <If check={userlabel !== undefined}>
+          <If check={userinfo.loggedIn}>
             <>
-              <Link style={styles.links} to='/add-restaurant'>
-                Add Restaurant
-              </Link>
+              <If check={userinfo.role === 'ADMIN'}>
+                <Link style={styles.links} to='/add-restaurant'>
+                  Add Restaurant
+                </Link>
+              </If>
+
               <Link style={styles.links} to='/restaurants'>
                 Restaurants
               </Link>
@@ -110,9 +114,15 @@ export const Header = function () {
           </If>
         </nav>
 
-        <If check={userlabel !== undefined}>
+        <If check={userinfo.loggedIn}>
           <>
-            <UserName>{userlabel}</UserName>
+            <UserName>
+              {iff(
+                userinfo.role === 'ADMIN',
+                `${userinfo.name} (${userinfo.role})`,
+                `${userinfo.name}`
+              )}
+            </UserName>
             <ColSpacer>15</ColSpacer>
             <LogoutOutlined
               onClick={() => {
