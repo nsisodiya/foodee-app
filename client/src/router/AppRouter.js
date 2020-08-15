@@ -10,6 +10,7 @@ import {
   Rating,
   SimpleComponentViewer,
   PageLogin,
+  RestaurantFullWidget,
   RestaurantWidget
 } from '../components';
 
@@ -28,6 +29,7 @@ const allComponents = [
   ReviewBox,
   AddReviewBox,
   RestaurantWidget,
+  RestaurantFullWidget,
   Header,
   PageRegister,
   PageLogin,

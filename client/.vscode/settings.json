@@ -3,5 +3,8 @@
   "editor.rulers": [80, 120],
   "eslint.options": {
     "configFile": "eslintrc.js"
+  },
+  "files.exclude": {
+    "node_modules": true
   }
 }

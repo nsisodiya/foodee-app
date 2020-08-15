@@ -20,6 +20,7 @@ const styles = {
       padding-right: 100px;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid gray;
     }
   `,
   logo: css`
@@ -42,9 +43,12 @@ const styles = {
 export const Header = function () {
   return (
     <div style={styles.container} data-file={filePath}>
-      <span>
-        <img style={styles.logo} src={logo} />
-      </span>
+      <Link to='/'>
+        <span>
+          <img style={styles.logo} src={logo} />
+        </span>
+      </Link>
+
       <nav style={styles.nav}>
         <Link style={styles.links} to='/login'>
           Login

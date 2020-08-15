@@ -8,6 +8,7 @@ import { PageRegister } from './PageRegister/PageRegister';
 import { PageLogin } from './PageLogin/PageLogin';
 import { Header } from './Header/Header';
 import { RestaurantWidget } from './RestaurantWidget/RestaurantWidget';
+import { RestaurantFullWidget } from './RestaurantFullWidget/RestaurantFullWidget';
 import { ReviewBox } from './ReviewBox/ReviewBox';
 import { AddReviewBox } from './AddReviewBox/AddReviewBox';
 
@@ -16,6 +17,7 @@ export {
   AddReviewBox,
   ReviewBox,
   RestaurantWidget,
+  RestaurantFullWidget,
   PageRegister,
   Header,
   PageLogin,
