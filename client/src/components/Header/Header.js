@@ -113,7 +113,7 @@ export const Header = function () {
         <If check={userlabel !== undefined}>
           <>
             <UserName>{userlabel}</UserName>
-            <ColSpacer>6</ColSpacer>
+            <ColSpacer>15</ColSpacer>
             <LogoutOutlined
               onClick={() => {
                 localStorage.removeItem('token');

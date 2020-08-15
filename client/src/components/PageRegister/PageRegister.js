@@ -5,6 +5,8 @@ import { DevLinks } from '../DevLinks/DevLinks';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
 import { generateFormItem } from '../forms/generateFormItem';
+import { Rows } from '../../css/Layout';
+import { H1 } from '../../css/common.styled';
 import { Container } from './PageRegister.styled';
 // Open - http://localhost:1234/components/page-register
 // Open - http://localhost:6006/?path=/story/components-pageregister--normal
@@ -37,30 +39,31 @@ export const PageRegister = function () {
         connectTo={(state) => {
           return (
             <>
-              <h1>Welcome to Restaurant Review</h1>
-              <h1>Create Your Account</h1>
-              <div
-                style={css`
-                  width: 50%;
-                `}>
-                <Form
-                  {...layout}
-                  name='basic'
-                  initialValues={{ remember: true }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}>
-                  {generateFormItem(state, 'name', actions.RegisterStore)}
-                  {generateFormItem(state, 'email', actions.RegisterStore)}
-                  {generateFormItem(state, 'password', actions.RegisterStore)}
+              <Rows centered>
+                <H1>Create Your Account</H1>
 
-                  <Form.Item {...tailLayout}>
-                    <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
-                      {state.submitBtnText}
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </div>
+                <div
+                  style={css`
+                    width: 50%;
+                  `}>
+                  <Form
+                    {...layout}
+                    name='basic'
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}>
+                    {generateFormItem(state, 'name', actions.RegisterStore)}
+                    {generateFormItem(state, 'email', actions.RegisterStore)}
+                    {generateFormItem(state, 'password', actions.RegisterStore)}
 
+                    <Form.Item {...tailLayout}>
+                      <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
+                        {state.submitBtnText}
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </div>
+              </Rows>
               <DevLinks displayName={PageRegister.displayName} filePath={filePath} />
             </>
           );

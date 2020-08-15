@@ -33,7 +33,9 @@ const StoreViewerFun = function (props) {
   return (
     <Container data-file={filePath} style={mtop30} className='p-3 border bg-gray-100 rounded-lg'>
       <div className='p-1 color-green-600'>StoreViewer - {props.storeName}</div>
-      <JSONViewer json={storeData} />
+      <div style={{ overflow: 'auto' }}>
+        <JSONViewer json={storeData} />
+      </div>
       <DevLinks displayName={'StoreViewer'} filePath={filePath} />
     </Container>
   );

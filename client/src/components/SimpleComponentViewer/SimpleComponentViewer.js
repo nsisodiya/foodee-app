@@ -14,7 +14,7 @@ const box = css`
 `;
 export const SimpleComponentViewer = function ({ comp }) {
   return (
-    <Container data-file={filePath} className='p-3 m-6 border bg-gray-400 rounded-lg'>
+    <Container data-file={filePath} className='p-3 m-1 border bg-gray-400 rounded-lg'>
       <div className='p-1 color-green-600'>Component Viewer - {comp.displayName}</div>
       {iff(
         comp.testProps !== undefined &&
@@ -25,7 +25,7 @@ export const SimpleComponentViewer = function ({ comp }) {
             return (
               <div className='flex flex-col' key={i} style={box}>
                 <div className='p-4 border border-blue-400'>{comp(prp)}</div>
-                <div className='p-4 m-5 bg-white'>
+                <div style={{ overflow: 'auto' }} className='p-4 m-5 bg-white'>
                   <JSONViewer json={prp} />
                 </div>
               </div>
@@ -37,7 +37,7 @@ export const SimpleComponentViewer = function ({ comp }) {
             <>
               <div className='flex flex-col' style={box}>
                 <div>{comp()}</div>
-                <div className='p-4 m-5 bg-white'>
+                <div style={{ overflow: 'auto' }} className='p-4 m-5 bg-white'>
                   <JSONViewer json={{}} />
                 </div>
               </div>

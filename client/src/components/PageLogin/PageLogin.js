@@ -5,10 +5,12 @@ import { DevLinks } from '../DevLinks/DevLinks';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
 import { generateFormItem } from '../forms/generateFormItem';
+import { Rows } from '../../css/Layout';
+import { H1 } from '../../css/common.styled';
+
 import { Container } from './PageLogin.styled';
 // Open - http://localhost:1234/components/page-login
 // Open - http://localhost:6006/?path=/story/components-pagelogin--normal
-
 const filePath = `/src/components/PageLogin/PageLogin.js`;
 
 const layout = {
@@ -38,28 +40,29 @@ export const PageLogin = function () {
         connectTo={(state) => {
           return (
             <>
-              <h1>Welcome to Restaurant Review</h1>
-              <h1>Login to Your Account</h1>
-              <div
-                style={css`
-                  width: 50%;
-                `}>
-                <Form
-                  {...layout}
-                  name='basic'
-                  initialValues={{ remember: true }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}>
-                  {generateFormItem(state, 'email', actions.LoginStore)}
-                  {generateFormItem(state, 'password', actions.LoginStore)}
+              <Rows centered>
+                <H1>Login to you account</H1>
+                <div
+                  style={css`
+                    width: 50%;
+                  `}>
+                  <Form
+                    {...layout}
+                    name='basic'
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}>
+                    {generateFormItem(state, 'email', actions.LoginStore)}
+                    {generateFormItem(state, 'password', actions.LoginStore)}
 
-                  <Form.Item {...tailLayout}>
-                    <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
-                      {state.submitBtnText}
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </div>
+                    <Form.Item {...tailLayout}>
+                      <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
+                        {state.submitBtnText}
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </div>
+              </Rows>
 
               <DevLinks displayName={PageLogin.displayName} filePath={filePath} />
             </>

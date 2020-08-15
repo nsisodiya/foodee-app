@@ -13,6 +13,11 @@ export const Columns = styled.div`
 export const Rows = styled.div`
   display: flex;
   flex-direction: column;
+  ${(props) =>
+    props.centered &&
+    tx`
+      align-items: center;
+    `}
 `;
 export const Hr = styled.hr`
   border-top: 1px solid lightgray;
