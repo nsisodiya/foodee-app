@@ -2,9 +2,13 @@ var express = require('express');
 
 var router = express.Router();
 const ReviewController = require('../models/ReviewController.js');
+const { adminRoleMiddleware } = require('./middleware');
 
 /*==========================
-    Admin only routes.
+    Regular User
+    1. [x] Create a review
+    2. [x] get a review
+    3. [x] get all reviews
 
     Admin should be able
 
@@ -62,7 +66,7 @@ router.post('/', async (req, res) => {
 });
 
 /* Update a review */
-router.put('/:_id', async (req, res) => {
+router.put('/:_id', adminRoleMiddleware, async (req, res) => {
   try {
     const { _id } = req.params;
     const inst = await ReviewController.updateReview(_id, req.body);
@@ -77,7 +81,7 @@ router.put('/:_id', async (req, res) => {
 });
 
 /* Delete a Review */
-router.delete('/:_id', async (req, res) => {
+router.delete('/:_id', adminRoleMiddleware, async (req, res) => {
   try {
     const { _id } = req.params;
     const inst = await ReviewController.deleteReview(_id);

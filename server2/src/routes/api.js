@@ -48,6 +48,10 @@ router.get('/getAllReviewsByRestaurantId/:_id', async function (req, res) {
 router.get('/getReviewsAllRestaurant', async function (req, res) {
   try {
     const inst = await ReviewController.getAvgReviews();
+    inst.forEach((v) => {
+      v.restaurant = v._id;
+      delete v._id;
+    });
     return res.json(inst);
     //db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRatings : {$avg : '$rating'}}}])
     // const { _id } = req.params;

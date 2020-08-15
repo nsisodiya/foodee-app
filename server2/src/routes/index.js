@@ -27,10 +27,10 @@ module.exports = (app) => {
   );
   app.use('/root', rootRouter);
   app.use('/users', authMiddleware, adminRoleMiddleware, usersRouter);
-  app.use('/restaurants', authMiddleware, adminRoleMiddleware, restaurantRouter);
+  app.use('/restaurants', authMiddleware, restaurantRouter);
   //app.use('/restaurants/:id/reviews', authMiddleware, xyz.getAllReviewsForRestraurant); //
   //app.use('/restaurants/:id/withreviews', authMiddleware, xyz.getRestaurantDatawithRevies); //
-  app.use('/reviews', authMiddleware, adminRoleMiddleware, reviewRouter);
+  app.use('/reviews', authMiddleware, reviewRouter);
   app.use('/auth', authRouter);
   app.use('/api', authMiddleware, apiRouter);
 };

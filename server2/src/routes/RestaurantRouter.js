@@ -2,9 +2,13 @@ var express = require('express');
 
 var router = express.Router();
 const RestaurantController = require('../models/RestaurantController.js');
+const { adminRoleMiddleware } = require('./middleware');
 
 /*==========================
-    Admin only routes.
+    Regular User be able
+
+    1. [x] get a restaurant
+    2. [x] get all restaurants
 
     Admin should be able
 
@@ -45,7 +49,7 @@ router.get('/:_id', async (req, res) => {
 });
 
 /* Create a restaurant */
-router.post('/', async (req, res) => {
+router.post('/', adminRoleMiddleware, async (req, res) => {
   try {
     const inst = await RestaurantController.createRestaurant(req.body);
     res.json(inst);
@@ -59,7 +63,7 @@ router.post('/', async (req, res) => {
 });
 
 /* Update a restaurant */
-router.put('/:_id', async (req, res) => {
+router.put('/:_id', adminRoleMiddleware, async (req, res) => {
   try {
     const { _id } = req.params;
     const inst = await RestaurantController.updateRestaurant(_id, req.body);
@@ -74,7 +78,7 @@ router.put('/:_id', async (req, res) => {
 });
 
 /* Delete a Restaurant */
-router.delete('/:_id', async (req, res) => {
+router.delete('/:_id', adminRoleMiddleware, async (req, res) => {
   try {
     const { _id } = req.params;
     const inst = await RestaurantController.deleteRestaurant(_id);
