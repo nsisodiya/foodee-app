@@ -11,7 +11,8 @@ import {
   SimpleComponentViewer,
   PageLogin,
   RestaurantFullWidget,
-  RestaurantWidget
+  RestaurantWidget,
+  PageRestaurantList
 } from '../components';
 
 import { ConstantsViewer } from '../devtools/ConstantsViewer';
@@ -33,7 +34,8 @@ const allComponents = [
   Header,
   PageRegister,
   PageLogin,
-  Rating
+  Rating,
+  PageRestaurantList
 ];
 
 function generateRoutes(compArray) {
@@ -70,6 +72,9 @@ export const AppRouter = function () {
           </Route>
           <Route path='/login/'>
             <PageLogin />
+          </Route>
+          <Route path='/restaurants/'>
+            <PageRestaurantList />
           </Route>
           <Route path='/constants/userroletype'>
             <ConstantsViewer data={UserRoleType} name='UserRoleType' />

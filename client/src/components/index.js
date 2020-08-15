@@ -11,9 +11,11 @@ import { RestaurantWidget } from './RestaurantWidget/RestaurantWidget';
 import { RestaurantFullWidget } from './RestaurantFullWidget/RestaurantFullWidget';
 import { ReviewBox } from './ReviewBox/ReviewBox';
 import { AddReviewBox } from './AddReviewBox/AddReviewBox';
+import { PageRestaurantList } from './PageRestaurantList/PageRestaurantList';
 
 export {
   AllStores,
+  PageRestaurantList,
   AddReviewBox,
   ReviewBox,
   RestaurantWidget,

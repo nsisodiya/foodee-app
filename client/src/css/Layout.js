@@ -26,3 +26,16 @@ export const ColSpacer = ({ children }) => {
 export const RowSpacer = ({ children }) => {
   return <div style={{ height: `${children}px` }} />;
 };
+
+export const If = ({ check, children }) => {
+  if (children.length === undefined) {
+    if (check) {
+      return children;
+    }
+    return null;
+  }
+  if (check) {
+    return children[0];
+  }
+  return children[1];
+};

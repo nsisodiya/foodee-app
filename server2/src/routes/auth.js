@@ -42,7 +42,7 @@ router.post('/login', async function (req, res) {
       return;
     }
     if (user.password === password) {
-      const token = jwt.sign({ role: user.role, id: user.id, email: user.email }, privateKey, {
+      const token = jwt.sign({ role: user.role, name: user.name, id: user.id, email: user.email }, privateKey, {
         expiresIn: '1d'
       });
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarFilled from '@ant-design/icons/es/icons/StarFilled';
 import { DevLinks } from '../DevLinks/DevLinks';
-import { Rows, Columns, RowSpacer, Hr } from '../../css/Layout';
+import { Rows, Columns, RowSpacer, Hr, If } from '../../css/Layout';
 
 const { Container, Title, FieldVal, Field } = {
   Container: styled.div`
@@ -74,13 +74,6 @@ const styles = {
 // Open - http://localhost:6006/?path=/story/components-restaurantfullwidget--normal
 
 const filePath = `/src/components/RestaurantFullWidget/RestaurantFullWidget.js`;
-const If = ({ check, children }) => {
-  if (check) {
-    return children[0];
-  }
-  return children[1];
-};
-
 export const RatingCard = ({ avgRating, reviews }) => {
   return (
     <Columns centered>
