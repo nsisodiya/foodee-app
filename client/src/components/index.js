@@ -12,6 +12,7 @@ import { RestaurantFullWidget } from './RestaurantFullWidget/RestaurantFullWidge
 import { ReviewBox } from './ReviewBox/ReviewBox';
 import { AddReviewBox } from './AddReviewBox/AddReviewBox';
 import { PageRestaurantList } from './PageRestaurantList/PageRestaurantList';
+import { PageAddRestaurant } from './PageAddRestaurant/PageAddRestaurant';
 
 export {
   AllStores,
@@ -27,7 +28,8 @@ export {
   DevLinks,
   SimpleComponentViewer,
   StoreViewer,
-  StoreConnector
+  StoreConnector,
+  PageAddRestaurant
 };
 
 // TODO - this file can be auto generated
