@@ -2,24 +2,103 @@ import React from 'react';
 //import css from 'css-template';
 import PropTypes from 'prop-types';
 //import styled from 'styled-components';
-//import { DisabledText } from '../../css/common.styled';
+import { Skeleton } from 'antd';
+import { H1 } from '../../css/common.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
+//import { iff } from '../../utils/iff';
+import { getHeaders } from '../../domless/utils/getHeaders';
+import { RestaurantFullWidget } from '../RestaurantFullWidget/RestaurantFullWidget';
+import { RowSpacer, Rows } from '../../css/Layout';
+import { ReviewBox } from '../ReviewBox/ReviewBox';
 import { Container } from './PageRestaurantDetails.styled';
-
 // Open - http://localhost:1234/components/page-restaurant-details
 // Open - http://localhost:6006/?path=/story/components-pagerestaurantdetails--normal
 
 const filePath = `/src/components/PageRestaurantDetails/PageRestaurantDetails.js`;
-
 export class PageRestaurantDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { favoritecolor: 'red' };
+    this.state = { loading: true, data: null };
   }
+  componentDidMount() {
+    try {
+      const restaurantId = location.pathname.split('/')[2];
+      if (typeof restaurantId === 'string' && restaurantId !== '') {
+        (async () => {
+          const res = await (
+            await fetch(`${process.env.API_URL}/api/getRestaurantWithReviews/${restaurantId}`, {
+              method: 'GET',
+              headers: getHeaders()
+            })
+          ).json();
+          console.error('res', res);
+          res.avgRating = null;
+          if (res.reviews.length !== 0) {
+            var total = 0;
+            res.reviews.forEach((v) => {
+              total = total + v.rating;
+            });
+            res.avgRating = parseFloat((total / res.reviews.length).toFixed(1));
+          }
+
+          this.setState({
+            data: res,
+            loading: false
+          });
+        })();
+      } else {
+        console.error('Something wrong, I wan looking for restaurantId but I got', restaurantId);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  //componentWillUnmount() {}
   render() {
+    if (this.state.loading) {
+      return (
+        <Container>
+          <Skeleton active loading />
+        </Container>
+      );
+    }
     return (
       <Container data-file={filePath}>
-        <h1>{this.state.favoritecolor}</h1>
+        <Rows centered>
+          <RowSpacer>30</RowSpacer>
+          <RestaurantFullWidget
+            {...{
+              name: this.state.data.name,
+              avgRating: this.state.data.avgRating,
+              totalReviews: this.state.data.reviews.length,
+              address: this.state.data.address,
+              cuisines: this.state.data.cuisines,
+              imageurl: this.state.data.imageurl,
+              hours: this.state.data.hours,
+              website: this.state.data.website,
+              phone: this.state.data.phone
+            }}
+          />
+          <RowSpacer>40</RowSpacer>
+          <H1>Add your review</H1>
+          <RowSpacer>100</RowSpacer>
+          <H1>All Reviews</H1>
+          {this.state.data.reviews.map((v) => {
+            return (
+              <ReviewBox
+                key={v.id}
+                {...{
+                  avatarurl: `https://robohash.org/${v.user.name}.png?size=50x50&set=set1`,
+                  author: v.user.name,
+                  visitDate: v.visitDate,
+                  comment: v.comment,
+                  rating: v.rating
+                }}
+              />
+            );
+          })}
+        </Rows>
         <DevLinks displayName={PageRestaurantDetails.displayName} filePath={filePath} />
       </Container>
     );

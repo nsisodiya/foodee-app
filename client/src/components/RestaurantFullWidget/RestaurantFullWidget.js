@@ -13,6 +13,7 @@ const { Container, Title, FieldVal, Field } = {
     background: white;
     padding: 14px;
     border-radius: 5px;
+    border: 1px solid gray;
   `,
   Title: styled.span`
     font-weight: 700;
@@ -74,14 +75,14 @@ const styles = {
 // Open - http://localhost:6006/?path=/story/components-restaurantfullwidget--normal
 
 const filePath = `/src/components/RestaurantFullWidget/RestaurantFullWidget.js`;
-export const RatingCard = ({ avgRating, reviews }) => {
+export const RatingCard = ({ avgRating, totalReviews }) => {
   return (
     <Columns centered>
       <StarFilled />
       <If check={typeof avgRating === 'number'}>
         <>
           <AvgRating>{avgRating}</AvgRating>
-          <ReviewsCount>({reviews})</ReviewsCount>
+          <ReviewsCount>({totalReviews})</ReviewsCount>
         </>
         <>
           <ReviewsCount>No rating</ReviewsCount>
@@ -92,13 +93,13 @@ export const RatingCard = ({ avgRating, reviews }) => {
 };
 RatingCard.propTypes = {
   avgRating: PropTypes.number,
-  reviews: PropTypes.number
+  totalReviews: PropTypes.number
 };
 
 export const RestaurantFullWidget = function ({
   name,
   avgRating,
-  reviews,
+  totalReviews,
   address,
   cuisines,
   imageurl,
@@ -119,7 +120,7 @@ export const RestaurantFullWidget = function ({
               margin-left: 10px;
             `}>
             <Title>{name}</Title>
-            <RatingCard {...{ avgRating, reviews }} />
+            <RatingCard {...{ avgRating, totalReviews }} />
             <Address>{address}</Address>
           </div>
         </Columns>
@@ -154,7 +155,7 @@ RestaurantFullWidget.testProps = [
   {
     id: '5f358588adc204837bf05f96',
     avgRating: 2.3,
-    reviews: 345,
+    totalReviews: 345,
     name: 'Punjabi Angithi',
     address: '32-22, A 4, DDA Market, Paschim Vihar, New Delhi',
     cuisines: 'North Indian, Chinese, Kebab, Rolls, Fast Food',
@@ -167,7 +168,7 @@ RestaurantFullWidget.testProps = [
   {
     id: '5f35ae3fcc6fe94c50783090',
     avgRating: 4.2,
-    reviews: 23453,
+    totalReviews: 23453,
     name: 'New Rajdhani',
     address: 'Nanded City Pune',
     cuisines: 'North Indian, Rajdhani',
@@ -180,7 +181,7 @@ RestaurantFullWidget.testProps = [
   {
     id: '5f35ae3fcc6fe94c50783090',
     avgRating: null,
-    reviews: null,
+    totalReviews: null,
     name: 'Mohan Dhaba'
   }
 ];
@@ -188,7 +189,7 @@ RestaurantFullWidget.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   avgRating: PropTypes.number,
-  reviews: PropTypes.number,
+  totalReviews: PropTypes.number,
   address: PropTypes.string,
   cuisines: PropTypes.string,
   imageurl: PropTypes.string,
