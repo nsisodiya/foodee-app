@@ -43,7 +43,8 @@ export const getRestaurantData = async () => {
   ratingData.forEach((r) => {
     if (restaurantData[r.restaurant] !== undefined) {
       restaurantData[r.restaurant].totalReviews = r.totalReviews;
-      restaurantData[r.restaurant].avgRating = r.avgRating;
+      //! TODO - remove this hardcoding. move to server
+      restaurantData[r.restaurant].avgRating = parseFloat(r.avgRating.toFixed(1));
     }
   });
   ///  -=================  Now sorting by rating.

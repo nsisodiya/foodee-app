@@ -7,12 +7,14 @@ import { Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { H1 } from '../../css/common.styled';
-
 //import { iff } from '../../utils/iff';
 import { RowSpacer, Rows, If } from '../../css/Layout';
 import { RestaurantWidget } from '..';
 import { getRestaurantData } from '../../domless/xhr/getRestaurantData';
+import { getUserInfo } from '../../utils/getUserInfo';
+import { history } from '../../domless/utils/history';
 import { Container } from './PageRestaurantList.styled';
+
 // Open - http://localhost:1234/components/page-restaurant-list
 // Open - http://localhost:6006/?path=/story/components-pagerestaurantlist--normal
 
@@ -23,17 +25,26 @@ export class PageRestaurantList extends React.Component {
     this.state = { loading: true, data: null };
   }
   componentDidMount() {
-    try {
-      (async () => {
-        const res = await getRestaurantData();
-        console.error('res', res);
-        this.setState({
-          data: res,
-          loading: false
-        });
-      })();
-    } catch (error) {
-      console.error(error);
+    const userinfo = getUserInfo();
+    if (userinfo.loggedIn) {
+      try {
+        (async () => {
+          const res = await getRestaurantData();
+          console.error('res', res);
+          this.setState({
+            data: res,
+            loading: false
+          });
+        })();
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      //Redirect to /login
+      history.push('/login');
+      // setTimeout(() => {
+      //   history.push('/login');
+      // }, 0);
     }
   }
 
