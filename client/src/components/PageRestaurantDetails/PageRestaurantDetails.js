@@ -2,7 +2,7 @@ import React from 'react';
 //import css from 'css-template';
 import PropTypes from 'prop-types';
 //import styled from 'styled-components';
-import { DisabledText } from '../../css/common.styled';
+//import { DisabledText } from '../../css/common.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { Container } from './PageRestaurantDetails.styled';
 
@@ -11,14 +11,20 @@ import { Container } from './PageRestaurantDetails.styled';
 
 const filePath = `/src/components/PageRestaurantDetails/PageRestaurantDetails.js`;
 
-export const PageRestaurantDetails = function () {
-  return (
-    <Container data-file={filePath}>
-      <DisabledText>This text is Disabled</DisabledText>
-      <DevLinks displayName={PageRestaurantDetails.displayName} filePath={filePath} />
-    </Container>
-  );
-};
+export class PageRestaurantDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { favoritecolor: 'red' };
+  }
+  render() {
+    return (
+      <Container data-file={filePath}>
+        <h1>{this.state.favoritecolor}</h1>
+        <DevLinks displayName={PageRestaurantDetails.displayName} filePath={filePath} />
+      </Container>
+    );
+  }
+}
 
 PageRestaurantDetails.displayName = 'PageRestaurantDetails';
 PageRestaurantDetails.testProps = [
