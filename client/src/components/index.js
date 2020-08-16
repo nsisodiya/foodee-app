@@ -13,6 +13,7 @@ import { ReviewBox } from './ReviewBox/ReviewBox';
 import { AddReviewBox } from './AddReviewBox/AddReviewBox';
 import { PageRestaurantList } from './PageRestaurantList/PageRestaurantList';
 import { PageAddRestaurant } from './PageAddRestaurant/PageAddRestaurant';
+import { PageRestaurantDetails } from './PageRestaurantDetails/PageRestaurantDetails';
 
 export {
   AllStores,
@@ -29,7 +30,8 @@ export {
   SimpleComponentViewer,
   StoreViewer,
   StoreConnector,
-  PageAddRestaurant
+  PageAddRestaurant,
+  PageRestaurantDetails
 };
 
 // TODO - this file can be auto generated
