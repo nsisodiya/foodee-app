@@ -8,6 +8,7 @@ import { Rows } from '../../css/Layout';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
 import { generateFormItem } from '../forms/generateFormItem';
+import { XHR_STATUS } from '../../constants/XHR_STATUS';
 
 const { Container } = {
   Container: styled.div`
@@ -47,6 +48,7 @@ export const AddReviewBox = function ({ restaurant }) {
                     onClick={() => {
                       actions.AddReviewStore.addReview();
                     }}
+                    loading={state.xhr.create.status === XHR_STATUS.XHR_IN_PROGRESS}
                     disabled={!state.isFormValid}
                     type='primary'>
                     {state.submitBtnText}

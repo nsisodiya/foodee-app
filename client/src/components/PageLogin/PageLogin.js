@@ -8,6 +8,7 @@ import { generateFormItem } from '../forms/generateFormItem';
 import { Rows } from '../../css/Layout';
 import { H1 } from '../../css/common.styled';
 
+import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { Container } from './PageLogin.styled';
 // Open - http://localhost:1234/components/page-login
 // Open - http://localhost:6006/?path=/story/components-pagelogin--normal
@@ -56,7 +57,11 @@ export const PageLogin = function () {
                     {generateFormItem(state, 'password', actions.LoginStore)}
 
                     <Form.Item {...tailLayout}>
-                      <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
+                      <Button
+                        loading={state.xhr.create.status === XHR_STATUS.XHR_IN_PROGRESS}
+                        disabled={!state.isFormValid}
+                        type='primary'
+                        htmlType='submit'>
                         {state.submitBtnText}
                       </Button>
                     </Form.Item>

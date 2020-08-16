@@ -12,6 +12,7 @@ import { generateFormItem } from '../forms/generateFormItem';
 import { Rows, RowSpacer } from '../../css/Layout';
 import { RestaurantWidget } from '../RestaurantWidget/RestaurantWidget';
 import { formUtil } from '../../domless/stores/formUtil';
+import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { Container } from './PageAddRestaurant.styled';
 // Open - http://localhost:1234/components/page-add-restaurant
 // Open - http://localhost:6006/?path=/story/components-pageaddrestaurant--normal
@@ -64,7 +65,11 @@ export const PageAddRestaurant = function () {
                     {generateFormItem(state, 'website', actions.AddRestaurantStore)}
                     {generateFormItem(state, 'phone', actions.AddRestaurantStore)}
                     <Form.Item {...tailLayout}>
-                      <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
+                      <Button
+                        loading={state.xhr.create.status === XHR_STATUS.XHR_IN_PROGRESS}
+                        disabled={!state.isFormValid}
+                        type='primary'
+                        htmlType='submit'>
                         {state.submitBtnText}
                       </Button>
                     </Form.Item>

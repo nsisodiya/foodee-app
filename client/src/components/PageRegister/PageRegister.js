@@ -7,6 +7,7 @@ import { actions } from '../../domless/stores/actions';
 import { generateFormItem } from '../forms/generateFormItem';
 import { Rows } from '../../css/Layout';
 import { H1 } from '../../css/common.styled';
+import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { Container } from './PageRegister.styled';
 // Open - http://localhost:1234/components/page-register
 // Open - http://localhost:6006/?path=/story/components-pageregister--normal
@@ -57,7 +58,11 @@ export const PageRegister = function () {
                     {generateFormItem(state, 'password', actions.RegisterStore)}
 
                     <Form.Item {...tailLayout}>
-                      <Button disabled={!state.isFormValid} type='primary' htmlType='submit'>
+                      <Button
+                        loading={state.xhr.create.status === XHR_STATUS.XHR_IN_PROGRESS}
+                        disabled={!state.isFormValid}
+                        type='primary'
+                        htmlType='submit'>
                         {state.submitBtnText}
                       </Button>
                     </Form.Item>
