@@ -7,9 +7,8 @@ import { H1 } from '../../css/common.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
 //import { iff } from '../../utils/iff';
 import { getHeaders } from '../../domless/utils/getHeaders';
-import { RestaurantFullWidget } from '../RestaurantFullWidget/RestaurantFullWidget';
 import { RowSpacer, Rows } from '../../css/Layout';
-import { ReviewBox } from '../ReviewBox/ReviewBox';
+import { AddReviewBox, RestaurantFullWidget, ReviewBox } from '..';
 import { Container } from './PageRestaurantDetails.styled';
 // Open - http://localhost:1234/components/page-restaurant-details
 // Open - http://localhost:6006/?path=/story/components-pagerestaurantdetails--normal
@@ -18,18 +17,21 @@ const filePath = `/src/components/PageRestaurantDetails/PageRestaurantDetails.js
 export class PageRestaurantDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, data: null };
+    const restaurantId = location.pathname.split('/')[2];
+    this.state = { loading: true, data: null, restaurantId: restaurantId };
   }
   componentDidMount() {
     try {
-      const restaurantId = location.pathname.split('/')[2];
-      if (typeof restaurantId === 'string' && restaurantId !== '') {
+      if (typeof this.state.restaurantId === 'string' && this.state.restaurantId !== '') {
         (async () => {
           const res = await (
-            await fetch(`${process.env.API_URL}/api/getRestaurantWithReviews/${restaurantId}`, {
-              method: 'GET',
-              headers: getHeaders()
-            })
+            await fetch(
+              `${process.env.API_URL}/api/getRestaurantWithReviews/${this.state.restaurantId}`,
+              {
+                method: 'GET',
+                headers: getHeaders()
+              }
+            )
           ).json();
           console.error('res', res);
           res.avgRating = null;
@@ -47,7 +49,10 @@ export class PageRestaurantDetails extends React.Component {
           });
         })();
       } else {
-        console.error('Something wrong, I wan looking for restaurantId but I got', restaurantId);
+        console.error(
+          'Something wrong, I wan looking for restaurantId but I got',
+          this.state.restaurantId
+        );
       }
     } catch (error) {
       console.error(error);
@@ -82,6 +87,7 @@ export class PageRestaurantDetails extends React.Component {
           />
           <RowSpacer>40</RowSpacer>
           <H1>Add your review</H1>
+          <AddReviewBox restaurant={this.state.restaurantId} />
           <RowSpacer>100</RowSpacer>
           <H1>All Reviews</H1>
           {this.state.data.reviews.map((v) => {
