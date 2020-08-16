@@ -7,7 +7,7 @@ import { H1 } from '../../css/common.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
 //import { iff } from '../../utils/iff';
 import { getHeaders } from '../../domless/utils/getHeaders';
-import { RowSpacer, Rows } from '../../css/Layout';
+import { RowSpacer, Rows, If } from '../../css/Layout';
 import { AddReviewBox, RestaurantFullWidget, ReviewBox } from '..';
 import { Container } from './PageRestaurantDetails.styled';
 // Open - http://localhost:1234/components/page-restaurant-details
@@ -89,7 +89,9 @@ export class PageRestaurantDetails extends React.Component {
           <H1>Add your review</H1>
           <AddReviewBox restaurant={this.state.restaurantId} />
           <RowSpacer>100</RowSpacer>
-          <H1>All Reviews</H1>
+          <If check={this.state.data.reviews.length > 0}>
+            <H1>All Reviews</H1>
+          </If>
           {this.state.data.reviews.map((v) => {
             return (
               <ReviewBox
