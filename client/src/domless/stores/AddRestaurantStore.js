@@ -56,7 +56,7 @@ export const AddRestaurantStore = createReducer({
   initialState: {
     fields: {
       name: {
-        placeholder: '',
+        placeholder: 'name of restaurant',
         label: 'Name',
         required: true,
         type: 'text',
