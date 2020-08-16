@@ -13,6 +13,7 @@ import {
   RestaurantFullWidget,
   RestaurantWidget,
   PageRestaurantList,
+  Delete,
   PageAddRestaurant,
   PageRestaurantDetails
 } from '../components';
@@ -39,6 +40,7 @@ const allComponents = [
   PageLogin,
   Rating,
   PageRestaurantList,
+  Delete,
   PageAddRestaurant,
   PageRestaurantDetails
 ];

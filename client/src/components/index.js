@@ -14,6 +14,7 @@ import { AddReviewBox } from './AddReviewBox/AddReviewBox';
 import { PageRestaurantList } from './PageRestaurantList/PageRestaurantList';
 import { PageAddRestaurant } from './PageAddRestaurant/PageAddRestaurant';
 import { PageRestaurantDetails } from './PageRestaurantDetails/PageRestaurantDetails';
+import { Delete } from './Delete/Delete';
 
 export {
   AllStores,
@@ -31,7 +32,8 @@ export {
   StoreViewer,
   StoreConnector,
   PageAddRestaurant,
-  PageRestaurantDetails
+  PageRestaurantDetails,
+  Delete
 };
 
 // TODO - this file can be auto generated

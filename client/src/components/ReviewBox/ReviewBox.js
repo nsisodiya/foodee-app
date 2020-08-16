@@ -6,6 +6,7 @@ import ta from 'time-ago';
 import Rate from 'antd/es/rate';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { Rows, Columns, ColSpacer, RowSpacer } from '../../css/Layout';
+import { Delete } from '..';
 
 const { Container, Author, Visit, Comment } = {
   Container: styled.div`
@@ -53,7 +54,7 @@ const styles = {
 
 const filePath = `/src/components/ReviewBox/ReviewBox.js`;
 
-export const ReviewBox = function ({ avatarurl, author, rating, comment, visitDate }) {
+export const ReviewBox = function ({ avatarurl, id, author, rating, comment, visitDate }) {
   return (
     <Container data-file={filePath}>
       <Rows>
@@ -77,6 +78,14 @@ export const ReviewBox = function ({ avatarurl, author, rating, comment, visitDa
         <RowSpacer>20</RowSpacer>
         <Comment>{comment}</Comment>
       </Rows>
+      <Delete
+        {...{
+          tooltip: 'Delete this review',
+          id: id,
+          apiurl: '/reviews',
+          signal: 'NEW_COMMENT_ADDED'
+        }}
+      />
       <DevLinks displayName={ReviewBox.displayName} filePath={filePath} />
     </Container>
   );
@@ -165,6 +174,7 @@ ReviewBox.testProps = [
 ];
 ReviewBox.propTypes = {
   avatarurl: PropTypes.string,
+  id: PropTypes.string.isRequired,
   author: PropTypes.string,
   rating: PropTypes.number,
   comment: PropTypes.string,

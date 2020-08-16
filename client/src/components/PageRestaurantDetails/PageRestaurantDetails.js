@@ -20,7 +20,8 @@ const getReviewBoxAttrs = (v) => {
     author: v.user.name,
     visitDate: v.visitDate,
     comment: v.comment,
-    rating: v.rating
+    rating: v.rating,
+    id: v.id
   };
 };
 const filePath = `/src/components/PageRestaurantDetails/PageRestaurantDetails.js`;
@@ -93,6 +94,7 @@ export class PageRestaurantDetails extends React.Component {
           <RestaurantFullWidget
             {...{
               name: this.state.data.name,
+              id: this.state.data.id,
               avgRating: this.state.data.avgRating,
               totalReviews: this.state.data.reviews.length,
               address: this.state.data.address,

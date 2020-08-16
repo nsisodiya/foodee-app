@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import StarFilled from '@ant-design/icons/es/icons/StarFilled';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { Rows, Columns, RowSpacer, Hr, If } from '../../css/Layout';
+import { Delete } from '..';
 
 const { Container, Title, FieldVal, Field } = {
   Container: styled.div`
@@ -105,7 +106,8 @@ export const RestaurantFullWidget = function ({
   imageurl,
   hours,
   website,
-  phone
+  phone,
+  id
 }) {
   return (
     <Container data-file={filePath}>
@@ -144,7 +146,15 @@ export const RestaurantFullWidget = function ({
           </Columns>
         </Rows>
       </Rows>
-
+      <Delete
+        {...{
+          tooltip: 'Delete Restaurant',
+          id: id,
+          apiurl: '/restaurants',
+          signal: '/restaurants',
+          redirect: true
+        }}
+      />
       <DevLinks displayName={RestaurantFullWidget.displayName} filePath={filePath} />
     </Container>
   );
