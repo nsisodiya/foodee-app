@@ -7,12 +7,21 @@ import { H1 } from '../../css/common.styled';
 import { DevLinks } from '../DevLinks/DevLinks';
 //import { iff } from '../../utils/iff';
 import { getHeaders } from '../../domless/utils/getHeaders';
-import { RowSpacer, Rows, If } from '../../css/Layout';
+import { RowSpacer, Rows, Columns, If, ColSpacer } from '../../css/Layout';
 import { AddReviewBox, RestaurantFullWidget, ReviewBox } from '..';
 import { Container } from './PageRestaurantDetails.styled';
 // Open - http://localhost:1234/components/page-restaurant-details
 // Open - http://localhost:6006/?path=/story/components-pagerestaurantdetails--normal
 
+const getReviewBoxAttrs = (v) => {
+  return {
+    avatarurl: `https://robohash.org/${v.user.name}.png?size=50x50&set=set1`,
+    author: v.user.name,
+    visitDate: v.visitDate,
+    comment: v.comment,
+    rating: v.rating
+  };
+};
 const filePath = `/src/components/PageRestaurantDetails/PageRestaurantDetails.js`;
 export class PageRestaurantDetails extends React.Component {
   constructor(props) {
@@ -86,25 +95,50 @@ export class PageRestaurantDetails extends React.Component {
             }}
           />
           <RowSpacer>40</RowSpacer>
+          <Columns>
+            <Rows centered>
+              <H1>Highest Rated</H1>
+              {(() => {
+                const topComment = JSON.parse(JSON.stringify(this.state.data.reviews)).sort(
+                  (b, a) => {
+                    return a.rating - b.rating;
+                  }
+                )[0];
+                if (topComment !== undefined) {
+                  return <ReviewBox {...getReviewBoxAttrs(topComment)} />;
+                }
+                return <div>No reviews yet</div>;
+              })()}
+            </Rows>
+            <ColSpacer>20</ColSpacer>
+            <Rows centered>
+              <H1>Low Rated</H1>
+              {(() => {
+                if (this.state.data.reviews.length === 1) {
+                  return;
+                }
+                const topComment = JSON.parse(JSON.stringify(this.state.data.reviews)).sort(
+                  (b, a) => {
+                    return b.rating - a.rating;
+                  }
+                )[0];
+                if (topComment !== undefined) {
+                  return <ReviewBox {...getReviewBoxAttrs(topComment)} />;
+                }
+                return <div>No reviews yet</div>;
+              })()}
+            </Rows>
+          </Columns>
+          <RowSpacer>40</RowSpacer>
           <H1>Add your review</H1>
           <AddReviewBox restaurant={this.state.restaurantId} />
-          <RowSpacer>100</RowSpacer>
+          <RowSpacer>10</RowSpacer>
+
           <If check={this.state.data.reviews.length > 0}>
             <H1>All Reviews</H1>
           </If>
           {this.state.data.reviews.map((v) => {
-            return (
-              <ReviewBox
-                key={v.id}
-                {...{
-                  avatarurl: `https://robohash.org/${v.user.name}.png?size=50x50&set=set1`,
-                  author: v.user.name,
-                  visitDate: v.visitDate,
-                  comment: v.comment,
-                  rating: v.rating
-                }}
-              />
-            );
+            return <ReviewBox key={v.id} {...getReviewBoxAttrs(v)} />;
           })}
         </Rows>
         <DevLinks displayName={PageRestaurantDetails.displayName} filePath={filePath} />

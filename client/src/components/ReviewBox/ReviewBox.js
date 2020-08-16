@@ -14,6 +14,7 @@ const { Container, Author, Visit, Comment } = {
     background: white;
     padding: 14px;
     border-radius: 5px;
+    border: 1px solid lightgray;
   `,
   Author: styled.span`
     font-size: 16px;
