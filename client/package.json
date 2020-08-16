@@ -22,7 +22,7 @@
     "lint": "eslint -c eslintrc.js ./src --ext .js,.jsx",
     "lint:fix": "eslint --fix -c eslintrc.js ./src --ext .js,.jsx",
     "prestart": "run-s clean",
-    "clean": "rimraf dist .cche",
+    "clean": "rimraf dist .cache",
     "fix": "run-s prettier lint:fix lint",
     "gitadd": "git add .",
     "generateComponent": "node src/devtools/genComponent.js",
