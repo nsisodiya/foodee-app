@@ -39,6 +39,7 @@
   "dependencies": {
     "@ant-design/icons": "4.2.2",
     "@fullhuman/postcss-purgecss": "2.3.0",
+    "@nsisodiya/eventbus": "1.1.0",
     "antd": "4.5.3",
     "chalk": "4.1.0",
     "change-case": "4.1.1",

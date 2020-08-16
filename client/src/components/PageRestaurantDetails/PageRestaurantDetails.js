@@ -9,6 +9,7 @@ import { DevLinks } from '../DevLinks/DevLinks';
 import { getHeaders } from '../../domless/utils/getHeaders';
 import { RowSpacer, Rows, Columns, If, ColSpacer } from '../../css/Layout';
 import { AddReviewBox, RestaurantFullWidget, ReviewBox } from '..';
+import { evtbus } from '../../utils/evtbus';
 import { Container } from './PageRestaurantDetails.styled';
 // Open - http://localhost:1234/components/page-restaurant-details
 // Open - http://localhost:6006/?path=/story/components-pagerestaurantdetails--normal
@@ -29,7 +30,7 @@ export class PageRestaurantDetails extends React.Component {
     const restaurantId = location.pathname.split('/')[2];
     this.state = { loading: true, data: null, restaurantId: restaurantId };
   }
-  componentDidMount() {
+  smartReload() {
     try {
       if (typeof this.state.restaurantId === 'string' && this.state.restaurantId !== '') {
         (async () => {
@@ -67,8 +68,16 @@ export class PageRestaurantDetails extends React.Component {
       console.error(error);
     }
   }
+  componentDidMount() {
+    this.unsub1 = evtbus.subscribe('NEW_COMMENT_ADDED', () => {
+      this.smartReload();
+    });
+    this.smartReload();
+  }
 
-  //componentWillUnmount() {}
+  componentWillUnmount() {
+    this.unsub1();
+  }
   render() {
     if (this.state.loading) {
       return (

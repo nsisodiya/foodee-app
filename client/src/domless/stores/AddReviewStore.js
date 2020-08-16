@@ -4,6 +4,7 @@ import { message } from 'antd';
 import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { getHeaders } from '../utils/getHeaders';
 import { HttpCodes } from '../utils/HttpCodes';
+import { evtbus } from '../../utils/evtbus';
 import { actions } from './actions';
 import { formUtil } from './formUtil';
 
@@ -143,9 +144,10 @@ export const AddReviewStore = createReducer({
     state.xhr.create.status = XHR_STATUS.XHR_IN_SUCCESS;
     state.xhr.create.successMessage = 'Thanks, your review Added';
     message.success(state.xhr.create.successMessage);
-    setTimeout(function () {
-      actions.AddReviewStore.clear();
-    }, 0);
+    evtbus.publish('NEW_COMMENT_ADDED');
+    // setTimeout(function () {
+    //   actions.AddReviewStore.clear();
+    // }, 0);
     //Clear Form. TODO
   },
   addReviewFailure(state, { statusCode, statusText, errorMessage }) {
