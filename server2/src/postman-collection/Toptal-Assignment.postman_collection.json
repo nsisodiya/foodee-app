@@ -496,7 +496,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/getRestaurantWithReviews/5f358588adc204837bf05f96",
+							"raw": "http://localhost:3000/api/getRestaurantWithReviews/5f35ae3fcc6fe94c50783090",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -505,7 +505,7 @@
 							"path": [
 								"api",
 								"getRestaurantWithReviews",
-								"5f358588adc204837bf05f96"
+								"5f35ae3fcc6fe94c50783090"
 							]
 						}
 					},
@@ -533,6 +533,32 @@
 								"api",
 								"getAllReviewsByRestaurantId",
 								"5f358588adc204837bf05f96"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReviewsAllRestaurant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/getReviewsAllRestaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"getReviewsAllRestaurant"
 							]
 						}
 					},
