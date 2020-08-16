@@ -1,14 +1,11 @@
 import React from 'react';
-import css from 'css-template';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'antd';
 import { DevLinks } from '../DevLinks/DevLinks';
 import { Rows } from '../../css/Layout';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
-import { generateFormItem } from '../forms/generateFormItem';
-import { XHR_STATUS } from '../../constants/XHR_STATUS';
+import { generateField, generateSubmitButton } from '../forms/generateFormItem';
 
 const { Container } = {
   Container: styled.div`
@@ -18,10 +15,6 @@ const { Container } = {
     padding: 14px;
     border-radius: 5px;
   `
-};
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 }
 };
 // Open - http://localhost:1234/components/add-review-box
 // Open - http://localhost:6006/?path=/story/components-addreviewbox--normal
@@ -38,22 +31,9 @@ export const AddReviewBox = function ({ restaurant }) {
           return (
             <>
               <Rows>
-                <Form {...layout} name='basic'>
-                  {generateFormItem(state, 'rating', actions.AddReviewStore)}
-                  {generateFormItem(state, 'comment', actions.AddReviewStore)}
-                  <Button
-                    style={css`
-                      width: min-content;
-                    `}
-                    onClick={() => {
-                      actions.AddReviewStore.addReview();
-                    }}
-                    loading={state.xhr.create.status === XHR_STATUS.XHR_IN_PROGRESS}
-                    disabled={!state.isFormValid}
-                    type='primary'>
-                    {state.submitBtnText}
-                  </Button>
-                </Form>
+                {generateField(state, 'rating', actions.AddReviewStore)}
+                {generateField(state, 'comment', actions.AddReviewStore)}
+                {generateSubmitButton(state, actions.AddReviewStore, 'nospace')}
               </Rows>
             </>
           );
@@ -71,5 +51,5 @@ AddReviewBox.testProps = [
   }
 ];
 AddReviewBox.propTypes = {
-  restaurant: PropTypes.String
+  restaurant: PropTypes.string
 };

@@ -87,7 +87,7 @@ export const AddReviewStore = createReducer({
     formUtil.validate(state, field, val, fieldMetaData);
     state.isFormValid = formUtil.calculateIsFormValid(state, fieldMetaData);
   },
-  addReview(state) {
+  create(state) {
     formUtil.validateAll(state, fieldMetaData);
     if (state.isFormValid === false) {
       return;
@@ -145,9 +145,9 @@ export const AddReviewStore = createReducer({
     state.xhr.create.successMessage = 'Thanks, your review Added';
     message.success(state.xhr.create.successMessage);
     evtbus.publish('NEW_COMMENT_ADDED');
-    // setTimeout(function () {
-    //   actions.AddReviewStore.clear();
-    // }, 0);
+    setTimeout(function () {
+      actions.AddReviewStore.clear();
+    }, 0);
     //Clear Form. TODO
   },
   addReviewFailure(state, { statusCode, statusText, errorMessage }) {
