@@ -8,7 +8,7 @@ var keys = ['comment', 'rating', 'visitDate', 'user', 'restaurant'];
 // Get all Reviews
 exports.getAllReviews = async () => {
   try {
-    return await Review.find();
+    return await Review.find().populate('user', 'name email');
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -28,7 +28,7 @@ exports.getAvgReviews = async () => {
 // Get all Reviews
 exports.getAllReviewsByRestaurantId = async (restaurant) => {
   try {
-    return await Review.find({ restaurant });
+    return await Review.find({ restaurant }).populate('user', 'name email');
   } catch (err) {
     throw boom.boomify(err);
   }
