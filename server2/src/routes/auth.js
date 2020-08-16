@@ -41,7 +41,8 @@ router.post('/login', async function (req, res) {
       res.json({ error: true, errorMessage: 'Email is not registered' });
       return;
     }
-    if (user.password === password) {
+    const isValid = await user.comparePassword(password);
+    if (isValid) {
       const token = jwt.sign({ role: user.role, name: user.name, id: user.id, email: user.email }, privateKey, {
         expiresIn: '1d'
       });

@@ -69,7 +69,7 @@ export const AppRouter = function () {
         <Header />
         <Switch>
           <Route exact path='/'>
-            <h1>Welcome</h1>
+            <PageRestaurantList />
           </Route>
           <Route path='/all'>{loadAllComponents(allComponents)}</Route>
           <Route path='/register/'>

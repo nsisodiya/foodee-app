@@ -159,8 +159,6 @@ export const RegisterStore = createReducer({
       window.location = '/login';
     }, timeout);
     //TODO - save Token from server and redirect to "/"
-    //TODO - show UI message that - res.successMessage
-    //TODO - Redirect to /Login
   },
   createAccountFailure(state, { statusCode, statusText, errorMessage }) {
     state.xhr.create.status = XHR_STATUS.XHR_IN_ERROR;
