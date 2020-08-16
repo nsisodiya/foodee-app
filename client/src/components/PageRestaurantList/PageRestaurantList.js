@@ -1,29 +1,87 @@
 import React from 'react';
-import css from 'css-template';
+//import css from 'css-template';
 import PropTypes from 'prop-types';
-import { DisabledText } from '../../css/common.styled';
+//import css from 'css-template';
+//import styled from 'styled-components';
+import { Skeleton } from 'antd';
+import { Link } from 'react-router-dom';
 import { DevLinks } from '../DevLinks/DevLinks';
+import { H1 } from '../../css/common.styled';
+
+//import { iff } from '../../utils/iff';
+import { RowSpacer, Rows, If } from '../../css/Layout';
+import { RestaurantWidget } from '..';
+import { getRestaurantData } from '../../domless/xhr/getRestaurantData';
 import { Container } from './PageRestaurantList.styled';
-
-const mtop30 = css`
-  margin-top: 30px;
-  margin-left: 30px;
-`;
-
 // Open - http://localhost:1234/components/page-restaurant-list
 // Open - http://localhost:6006/?path=/story/components-pagerestaurantlist--normal
 
 const filePath = `/src/components/PageRestaurantList/PageRestaurantList.js`;
+export class PageRestaurantList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, data: null };
+  }
+  componentDidMount() {
+    try {
+      (async () => {
+        const res = await getRestaurantData();
+        console.error('res', res);
+        this.setState({
+          data: res,
+          loading: false
+        });
+      })();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-export const PageRestaurantList = function ({ id }) {
-  return (
-    <Container data-file={filePath} style={mtop30} className='p-3 border bg-gray-100 rounded-lg'>
-      <div className='p-1 color-green-600'>PageRestaurantList {id}</div>
-      <DisabledText>This text is Disabled</DisabledText>
-      <DevLinks displayName={PageRestaurantList.displayName} filePath={filePath} />
-    </Container>
-  );
-};
+  //componentWillUnmount() {}
+  render() {
+    if (this.state.loading) {
+      return (
+        <Container>
+          <Skeleton active loading />
+        </Container>
+      );
+    }
+    return (
+      <Container data-file={filePath}>
+        <Rows centered>
+          <RowSpacer>30</RowSpacer>
+          <If check={this.state.data.length > 0}>
+            <H1>We found few restaurants around your place</H1>
+          </If>
+          {this.state.data.map((v) => {
+            return (
+              <div key={v.id}>
+                <Link to={`/restaurant/${v.id}`}>
+                  <RestaurantWidget
+                    {...{
+                      name: v.name,
+                      avgRating: v.avgRating,
+                      totalReviews: v.reviews.length,
+                      address: v.address,
+                      cuisines: v.cuisines,
+                      imageurl: v.imageurl,
+                      hours: v.hours,
+                      website: v.website,
+                      phone: v.phone
+                    }}
+                  />
+                </Link>
+
+                <RowSpacer>20</RowSpacer>
+              </div>
+            );
+          })}
+        </Rows>
+        <DevLinks displayName={PageRestaurantList.displayName} filePath={filePath} />
+      </Container>
+    );
+  }
+}
 
 PageRestaurantList.displayName = 'PageRestaurantList';
 PageRestaurantList.testProps = [

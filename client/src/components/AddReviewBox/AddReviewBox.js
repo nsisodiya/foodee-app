@@ -37,9 +37,6 @@ export const AddReviewBox = function ({ restaurant }) {
           return (
             <>
               <Rows>
-                {state.fields.rating.val}
-                {'-'}
-                {state.fields.comment.val}
                 <Form {...layout} name='basic'>
                   {generateFormItem(state, 'rating', actions.AddReviewStore)}
                   {generateFormItem(state, 'comment', actions.AddReviewStore)}

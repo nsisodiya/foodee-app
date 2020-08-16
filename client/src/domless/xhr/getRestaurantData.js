@@ -33,7 +33,7 @@ export const getRestaurantData = async () => {
   restaurants.forEach((v) => {
     restaurantData[v.id] = v;
     restaurantData[v.id].totalReviews = 0;
-    restaurantData[v.id].avgRatings = null;
+    restaurantData[v.id].avgRating = null;
   });
   reviews.forEach((r) => {
     if (restaurantData[r.restaurant] !== undefined) {
@@ -43,11 +43,17 @@ export const getRestaurantData = async () => {
   ratingData.forEach((r) => {
     if (restaurantData[r.restaurant] !== undefined) {
       restaurantData[r.restaurant].totalReviews = r.totalReviews;
-      restaurantData[r.restaurant].avgRatings = r.avgRatings;
+      restaurantData[r.restaurant].avgRating = r.avgRating;
     }
   });
-
-  console.error({ restaurants, reviews, ratingData });
-  return restaurantData;
+  ///  -=================  Now sorting by rating.
+  var finalData = Object.keys(restaurantData)
+    .map((restId) => {
+      return restaurantData[restId];
+    })
+    .sort((b, a) => {
+      return a.avgRating - b.avgRating;
+    });
+  return finalData;
 };
 window.getRestaurantData = getRestaurantData;

@@ -9,7 +9,7 @@ import { H1 } from '../../css/common.styled';
 import { StoreConnector } from '../../components/StoreConnector/StoreConnector';
 import { actions } from '../../domless/stores/actions';
 import { generateFormItem } from '../forms/generateFormItem';
-import { Rows } from '../../css/Layout';
+import { Rows, RowSpacer } from '../../css/Layout';
 import { RestaurantWidget } from '../RestaurantWidget/RestaurantWidget';
 import { formUtil } from '../../domless/stores/formUtil';
 import { Container } from './PageAddRestaurant.styled';
@@ -45,6 +45,7 @@ export const PageAddRestaurant = function () {
               <Rows centered>
                 <H1>Add Restaurant</H1>
                 <RestaurantWidget {...formUtil.getCurrentFormValue(state)} />
+                <RowSpacer>50</RowSpacer>
                 <div
                   style={css`
                     width: 50%;

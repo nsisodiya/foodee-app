@@ -53,7 +53,7 @@ router.get('/getReviewsAllRestaurant', async function (req, res) {
       delete v._id;
     });
     return res.json(inst);
-    //db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRatings : {$avg : '$rating'}}}])
+    //db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRating : {$avg : '$rating'}}}])
     // const { _id } = req.params;
     // const inst = await /5f358588adc204837bf05f96/5f358588adc204837bf05f96wController.getAllReviewsByRestaurantId(_id);
     return res.json({ working: 'working' });

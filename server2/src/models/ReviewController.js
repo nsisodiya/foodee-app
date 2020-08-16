@@ -15,10 +15,10 @@ exports.getAllReviews = async () => {
 };
 // getAll AvgRatings and total Reviews;
 exports.getAvgReviews = async () => {
-  //  db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRatings : {$avg : '$rating'}}}])
+  //  db.reviews.aggregate([{$group : {_id : "$restaurant", totalReviews: {$sum: 1}, avgRating : {$avg : '$rating'}}}])
   try {
     return await Review.aggregate([
-      { $group: { _id: '$restaurant', totalReviews: { $sum: 1 }, avgRatings: { $avg: '$rating' } } }
+      { $group: { _id: '$restaurant', totalReviews: { $sum: 1 }, avgRating: { $avg: '$rating' } } }
     ]);
   } catch (err) {
     throw boom.boomify(err);
@@ -28,7 +28,7 @@ exports.getAvgReviews = async () => {
 // Get all Reviews
 exports.getAllReviewsByRestaurantId = async (restaurant) => {
   try {
-    return await Review.find({ restaurant }).populate('user', 'name email');
+    return await Review.find({ restaurant }).populate('user', 'name email').sort('field -visitDate').exec();
   } catch (err) {
     throw boom.boomify(err);
   }
