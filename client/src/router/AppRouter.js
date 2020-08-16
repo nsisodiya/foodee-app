@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import React from 'react';
 import { paramCase } from 'change-case';
 import {
@@ -16,6 +16,7 @@ import {
   PageAddRestaurant,
   PageRestaurantDetails
 } from '../components';
+import { history } from '../domless/utils/history';
 
 import { ConstantsViewer } from '../devtools/ConstantsViewer';
 import { UserRoleType } from '../constants/UserRoleType';
@@ -64,7 +65,7 @@ function loadAllComponents(compArray) {
 export const AppRouter = function () {
   return (
     <>
-      <Router>
+      <Router history={history}>
         <Header />
         <Switch>
           <Route exact path='/'>

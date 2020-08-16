@@ -4,9 +4,9 @@ import { message } from 'antd';
 import { XHR_STATUS } from '../../constants/XHR_STATUS';
 import { getHeaders } from '../utils/getHeaders';
 import { HttpCodes } from '../utils/HttpCodes';
+import { history } from '../utils/history';
 import { actions } from './actions';
 import { formUtil } from './formUtil';
-
 /*
 {
     "name": "New Rajdhani",
@@ -185,7 +185,8 @@ export const AddRestaurantStore = createReducer({
     message.success(state.xhr.create.successMessage);
     const duration = 1000;
     setTimeout(() => {
-      location = `/restaurant/${res.id}`;
+      history.push(`/restaurant/${res.id}`);
+      //location = `/restaurant/${res.id}`;
     }, duration);
 
     //TODO - Clear form;
