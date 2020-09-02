@@ -69,6 +69,11 @@ UserSchema.pre('save', function (next) {
     });
   });
 });
+UserSchema.methods.toJSON = function () {
+  var obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 UserSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
