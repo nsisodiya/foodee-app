@@ -9,7 +9,8 @@ import './css/tailwind.pcss';
 import { App } from './App';
 import { store } from './domless/stores/store';
 
-window.projectPath = '/home/narendra/Coding/toptal-assignment/narendra-sisodiya/client';
+window.projectPath =
+  '/Users/narendra/Coding/ForSorting/Coding/toptal-assignment/narendra-sisodiya/client';
 
 var mountNode = document.getElementById('root');
 ReactDOM.render(

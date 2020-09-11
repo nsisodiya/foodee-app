@@ -15,7 +15,7 @@
     "deploy": "run-s build deploy:copyindex deploy:copyreports deploy:upload",
     "deploy:copyindex": "cp dist/index.html dist/200.html",
     "deploy:copyreports": "cp -rv reports dist/reports",
-    "deploy:upload": "surge dist toptal-nsisodiya.surge.sh",
+    "deploy:upload": "surge dist foodee-app-nsisodiya.surge.sh",
     "test1": "jest --coverage --updateSnapshot",
     "test:watch": "jest --watch",
     "lint:css": "stylelint \"./src/**/*.js\"",

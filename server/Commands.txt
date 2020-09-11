@@ -1,7 +1,7 @@
-mongo --authenticationDatabase toptal -u admin -p password
+mongo --authenticationDatabase foodee -u admin -p password
 
 
-> use toptal;
+> use foodee;
 > db.users.find()
 
 // Set a use admin;

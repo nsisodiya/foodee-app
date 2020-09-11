@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 module.exports = () => {
-  let dburl = 'mongodb://admin:password@localhost:27017/toptal';
+  let dburl = 'mongodb://admin:password@localhost:27017/foodee';
   let mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,

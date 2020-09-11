@@ -22,7 +22,7 @@ module.exports = (app) => {
   app.use(
     '/',
     express.Router().get('/', (req, res) => {
-      res.json({ server: 'Toptal Assignment', status: 'Working' });
+      res.json({ server: 'Foodee', status: 'Working' });
     })
   );
   app.use('/root', rootRouter);

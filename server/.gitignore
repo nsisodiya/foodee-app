@@ -117,3 +117,5 @@ dist
 
 
 database.sqlite3
+localmongodbdata
+db/localmongodbdata
